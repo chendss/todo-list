@@ -1,0 +1,7 @@
+{
+  "path-intellisense.mappings": {
+    "@img": "${workspaceRoot}/client/src/assets/img",
+    "@utils": "${workspaceRoot}/client/src/utils",
+    "@": "${workspaceRoot}/client/src/",
+  }
+}

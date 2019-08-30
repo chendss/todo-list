@@ -1,0 +1,34 @@
+{
+  "include": [
+    "./src/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@utils/*": [
+        "src/Utils/*"
+      ],
+      "@img/*": [
+        "src/assets/img/*"
+      ],
+      "@pages/*": [
+        "src/Pages/*"
+      ],
+      "@store/*": [
+        "src/Stores/*"
+      ],
+      "@widget/*": [
+        "src/Components/*"
+      ],
+    },
+  },
+  "typeAcquisition": {
+    "include": []
+  },
+}
