@@ -1,9 +1,11 @@
-import Home from '@pages/Home/index.vue'
+import Home from '@admin/Home'
 
 export default {
-  routes: [
-    {
-      path: '/', component: Home, name: 'home'
-    }
-  ]
+	routes: [
+		{
+			path: '/',
+			component: Home,
+			name: 'home',
+		},
+	],
 }

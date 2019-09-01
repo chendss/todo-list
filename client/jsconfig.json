@@ -17,8 +17,11 @@
       "@img/*": [
         "src/assets/img/*"
       ],
-      "@pages/*": [
-        "src/Pages/*"
+      "@admin/*": [
+        "src/Pages/Admin/*"
+      ],
+      "@H5/*": [
+        "src/Pages/H5/*"
       ],
       "@store/*": [
         "src/Stores/*"
