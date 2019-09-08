@@ -7,7 +7,8 @@
       <div class="login">
         登录
       </div>
-      <div class="register">
+      <div class="register"
+        @click="register">
         没有帐户? 请免费注册
       </div>
     </div>

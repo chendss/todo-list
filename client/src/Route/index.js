@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import Login from '@pages/Login'
+import Register from '@pages/Register'
 import Home from '@pages/Home'
 import VueRouter from 'vue-router'
 import { isMobile } from '@utils/flex'
@@ -11,6 +13,16 @@ const routeDict = {
 			path: '/',
 			component: Home,
 			name: 'home',
+		},
+		{
+			path: '/login',
+			component: Login,
+			name: 'login',
+		},
+		{
+			path: '/register',
+			component: Register,
+			name: 'register',
 		},
 	],
 }

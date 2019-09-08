@@ -20,18 +20,18 @@
 			}
 		}
 		.detail {
-			font-size: 16px;
 			color: #666;
-			max-width: 300px;
 			margin: 20px 0;
+			font-size: 16px;
+			max-width: 300px;
 			text-align: center;
 		}
 		.login {
+			color: white;
+			font-size: 16px;
+			font-weight: 700;
 			padding: 14px 60px;
 			background: #4663f3;
-			color: white;
-			font-weight: 700;
-			font-size: 16px;
 			text-decoration: none;
 			cursor: pointer;
 			&:hover {
@@ -40,11 +40,11 @@
 			}
 		}
 		.register {
+			margin: 20px 0;
+			color: #4663f3;
 			font-size: 16px;
 			max-width: 300px;
-			margin: 20px 0;
 			text-align: center;
-			color: #4663f3;
 			text-decoration: none;
 			cursor: pointer;
 			&:hover {
@@ -53,10 +53,10 @@
 		}
 	}
 	.footer {
-		display: flex;
-		align-items: center;
-		flex: 1 1 auto;
 		height: 100%;
+		display: flex;
+		flex: 1 1 auto;
+		align-items: center;
 		img {
 			max-width: 896px;
 			max-height: 581px;
