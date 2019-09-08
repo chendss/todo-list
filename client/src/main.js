@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import store from '@store'
 import App from './App.vue'
-import routers from './Route'
-import VueRouter from 'vue-router'
+import router from './Route'
 
-const vueUse = function() {
-	Vue.use(VueRouter)
-}
+const vueUse = function() {}
 
 const vueSetting = function() {
 	Vue.config.productionTip = false
@@ -15,7 +12,7 @@ const vueSetting = function() {
 const vueInit = function() {
 	new Vue({
 		store,
-		router: new VueRouter(routers),
+		router,
 		render: h => h(App),
 	}).$mount('#app')
 }

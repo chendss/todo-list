@@ -1,11 +1,11 @@
-const isMobile = function() {
+export const isMobile = function() {
 	let result = navigator.userAgent.match(
 		/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
 	)
 	return !!result
 }
 
-const H5 = function() {
+export const H5 = function() {
 	!(function(e) {
 		function t(a) {
 			if (i[a]) return i[a].exports
@@ -50,13 +50,9 @@ const H5 = function() {
 	flex(100, 1)
 }
 
-const pc= function(){
-  
-}
-
-
-export default function() {
-  window.addEventListener('load',event=>{
-    if 
-  })
+export const pc = function() {
+	const html = document.querySelector('html')
+	html.style.fontSize = ''
+	const meta = document.querySelector('meta[name="viewport"]')
+	meta.outerHTML = '<meta name="viewport" content="width=device-width,initial-scale=1.0">'
 }

@@ -17,12 +17,18 @@ module.exports = {
 		config.resolve.alias
 			.set('@', resolve('src'))
 			.set('@pages', resolve('./src/Pages'))
-			.set('@h5', resolve('./src/Pages/H5'))
 			.set('@utils', resolve('./src/Utils/'))
 			.set('@store', resolve('./src/Stores/'))
 			.set('@img', resolve('./src/assets/img/'))
-			.set('@admin', resolve('./src/Pages/Admin'))
 			.set('@widget', resolve('./src/Components'))
 		config.resolve.symlinks(true)
+	},
+	css: {
+		loaderOptions: {
+			sass: {
+				// @/ 是 src/ 的别名
+				data: `@import "@/assets/global.scss";`,
+			},
+		},
 	},
 }
