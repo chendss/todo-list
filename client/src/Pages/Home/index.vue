@@ -4,7 +4,8 @@
       <img src="@img/logo.svg">
       <h1 class="title">Microsoft To-Do</h1>
       <p class="detail">从工作到休闲，To-Do 都是日常完成任务的最简便方式。</p>
-      <div class="login">
+      <div class="login"
+        @click="login">
         登录
       </div>
       <div class="register"
