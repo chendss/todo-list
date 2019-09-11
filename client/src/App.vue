@@ -2,6 +2,7 @@
   <div id="app"
     class="app">
     <router-view></router-view>
+    <notifications></notifications>
   </div>
 </template>
 
@@ -11,7 +12,7 @@ export default {
   name: 'app',
   components: {
   },
-  mounted () {
+  created () {
   },
 }
 </script>

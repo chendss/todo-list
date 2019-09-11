@@ -5,6 +5,12 @@ export default {
   created () { },
   methods: {
     register () {
+      console.log('ww')
+      this.$notify({
+        title: 'Important message',
+        text: 'Hello user! This is a notification!'
+      })
+      return
       this.$router.push('/userInfo/register')
     },
     login () {

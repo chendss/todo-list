@@ -17,6 +17,7 @@
         <div class="pwd-box">
           <input id="pwd"
             class="input"
+            v-model="pwd"
             placeholder='请输入密码'
             type="password"
             maxlength="113">
@@ -25,11 +26,13 @@
           v-if="type==='register'">
           <input id="confirm-pwd"
             class="input"
+            v-model="confirmPwd"
             placeholder='请确认密码'
             type="password"
             maxlength="113">
         </div>
-        <div class="login-btn">{{text}}</div>
+        <div class="login-btn"
+          @click="action">{{text}}</div>
       </div>
     </div>
   </div>
