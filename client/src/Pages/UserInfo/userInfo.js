@@ -14,20 +14,15 @@ export default {
 				confirmPassword: '',
 			},
 			rules: {
-				username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
-				password: [{ required: true, message: '请输入密码', trigger: 'change' }],
+				username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+				password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 				confirmPassword: [{ validator: this.confirmPwdValidator, trigger: 'change' }],
 			},
 			type: '',
 		}
 	},
 	mounted() {
-		const type = get(this, '$route.params.type', 'login')
-		if (type === 'login') {
-			this.type = 'login'
-		} else {
-			this.type = 'register'
-		}
+		this.type = get(this, '$route.params.type', 'login')
 	},
 	methods: {
 		confirmPwdValidator(rule, value, callback) {
