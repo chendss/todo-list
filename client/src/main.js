@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import store from '@stores'
 import App from './App.vue'
+import '@icon/iconfont.css'
 import router from './Route'
 import flex from '@utils/flex.js'
 import { isMobile } from '@utils/flex.js'
-import '@icon/iconfont.css'
 
 const vueUse = function() {}
 

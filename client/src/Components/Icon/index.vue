@@ -1,3 +1,9 @@
+<style lang="scss">
+.icon-box {
+  @include inline-flex();
+}
+</style>
+
 <template>
   <div class="icon-box">
     <i :class="iconName"></i>
@@ -16,7 +22,6 @@ export default {
   },
   mounted () {
     this.iconName += get(this, 'icon', '')
-    console.log('eee', this.iconName, this.props)
   },
 }
 </script>
