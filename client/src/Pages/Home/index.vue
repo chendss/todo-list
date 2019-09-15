@@ -13,7 +13,8 @@
         没有帐户? 请免费注册
       </div>
     </div>
-    <footer class="footer">
+    <footer class="footer"
+      v-if="!$mobile">
       <img src="@img/background.jpg">
     </footer>
   </div>

@@ -56,3 +56,11 @@ export const pc = function() {
 	const meta = document.querySelector('meta[name="viewport"]')
 	meta.outerHTML = '<meta name="viewport" content="width=device-width,initial-scale=1.0">'
 }
+
+export default function() {
+	if (isMobile()) {
+		H5()
+	} else {
+		pc()
+	}
+}

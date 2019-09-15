@@ -11,7 +11,7 @@ def api_factory(body):
 
 def err_factory(body):
     error_model = {
-        'message': body,
+        'msg': body,
         'success': False
     }
     return json.dumps(error_model)

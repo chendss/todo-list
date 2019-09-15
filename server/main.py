@@ -4,7 +4,7 @@ import datetime
 import subprocess
 import time
 import threading
-from flask_cors import *
+from flask_cors import CORS
 from login import login_api
 from flask import Flask, redirect, abort, make_response, jsonify, send_file, request
 
