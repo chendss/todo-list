@@ -26,9 +26,12 @@
       "@widget/*": [
         "src/Components/*"
       ],
-    },
+      "@icon/*": [
+        "src/assets/icon/*"
+      ]
+    }
   },
   "typeAcquisition": {
     "include": []
-  },
+  }
 }

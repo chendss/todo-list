@@ -4,11 +4,9 @@ import App from './App.vue'
 import router from './Route'
 import flex from '@utils/flex.js'
 import { isMobile } from '@utils/flex.js'
-import VueSweetalert2 from 'vue-sweetalert2'
+import '@icon/iconfont.css'
 
-const vueUse = function() {
-	Vue.use(VueSweetalert2)
-}
+const vueUse = function() {}
 
 const vueSetting = function() {
 	Vue.config.productionTip = false

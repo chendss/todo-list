@@ -21,7 +21,8 @@ module.exports = {
 			.set('@utils', resolve('./src/Utils/'))
 			.set('@stores', resolve('./src/Stores/'))
 			.set('@img', resolve('./src/assets/img/'))
-			.set('@widget', resolve('./src/Components'))
+			.set('@widget', resolve('./src/Components/'))
+			.set('@icon', resolve('./src/assets/icon/'))
 		config.resolve.symlinks(true)
 	},
 	css: {

@@ -1,0 +1,22 @@
+$blue: #4663f3;
+$blue-hover: #2e4ff1;
+
+@mixin full {
+	width: 100%;
+	height: 100%;
+}
+
+@mixin flex-center() {
+	align-items: center;
+	justify-items: center;
+}
+
+@mixin flex() {
+	display: flex;
+	@include flex-center();
+}
+
+@mixin inline-flex {
+	display: inline-flex;
+	@include flex-center();
+}

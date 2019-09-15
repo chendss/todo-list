@@ -1,39 +1,34 @@
 <template>
-  <div class='user-info-box'>
-    <img src='@img/register-background.jpg'>
-    <div class="content">
-      <div class="inner">
-        <img class="logo"
-          src="@img/microsoft_logo.svg">
-        <p class="login-title">{{text}}</p>
-        <div class="user-box">
-          <input id="user"
-            class="input"
-            placeholder='请输入账号'
-            v-model="user"
-            type="email"
-            maxlength="113">
+  <div class="login-wrap">
+    <div class="ms-login">
+      <div class="ms-title">后台管理系统</div>
+      <Form :model="param"
+        :rules="rules"
+        ref="login"
+        label-width="0px"
+        class="ms-content">
+        <FormItem prop="username">
+          <ElementInput v-model="param.username"
+            placeholder="username">
+            <Icon slot="prepend"
+              icon="icon-yidiandiantubiao08"></Icon>
+          </ElementInput>
+        </FormItem>
+        <FormItem prop="password">
+          <ElementInput type="password"
+            placeholder="password"
+            v-model="param.password"
+            @keyup.enter.native="submitForm()">
+            <Icon slot="prepend"
+              icon="icon-suo"></Icon>
+          </ElementInput>
+        </FormItem>
+        <div class="login-btn">
+          <Button type="primary"
+            @click="submitForm()">登录</Button>
         </div>
-        <div class="pwd-box">
-          <input id="pwd"
-            class="input"
-            v-model="pwd"
-            placeholder='请输入密码'
-            type="password"
-            maxlength="113">
-        </div>
-        <div class="confirm-pwd-box"
-          v-if="type==='register'">
-          <input id="confirm-pwd"
-            class="input"
-            v-model="confirmPwd"
-            placeholder='请确认密码'
-            type="password"
-            maxlength="113">
-        </div>
-        <div class="login-btn"
-          @click="action">{{text}}</div>
-      </div>
+        <p class="login-tips">Tips : 用户名和密码随便填。</p>
+      </Form>
     </div>
   </div>
 </template>

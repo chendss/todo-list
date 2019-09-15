@@ -5,14 +5,14 @@ import subprocess
 import time
 import threading
 from flask_cors import CORS
-from login import login_api
+from user_info import user_info_api
 from flask import Flask, redirect, abort, make_response, jsonify, send_file, request
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 CORS(app, resources=r'/*')
 
-app.register_blueprint(login_api)
+app.register_blueprint(user_info_api)
 
 
 @app.route('/', methods=['GET'])

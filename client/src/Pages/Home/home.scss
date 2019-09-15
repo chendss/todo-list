@@ -31,11 +31,11 @@
 			font-size: 16px;
 			font-weight: 700;
 			padding: 14px 60px;
-			background: #4663f3;
+			background: $blue;
 			text-decoration: none;
 			cursor: pointer;
 			&:hover {
-				background: #2e4ff1;
+				background: $blue-hover;
 				text-decoration: none;
 			}
 		}

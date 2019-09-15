@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { get } from './index'
-import { message } from './message'
+import { Message } from 'element-ui'
 
 axios.interceptors.response.use(
 	response => {
@@ -46,7 +46,7 @@ export const POST = async function(url, requestData) {
 	const { data, msg, success } = result
 	if (success === false) {
 		const info = msg || '未知错误'
-		message(info)
+		Message.error(info)
 		throw { info, result }
 	}
 }
