@@ -9,8 +9,8 @@ export default {
 	data() {
 		return {
 			param: {
-				username: 'admin',
-				password: '123123',
+				username: '',
+				password: '',
 				confirmPassword: '',
 			},
 			rules: {
