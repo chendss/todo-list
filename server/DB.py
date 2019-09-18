@@ -1,8 +1,8 @@
 import sqlite3
 import time
-from sql_tools import split_dict, cutting_dict, str_to_table, tuple_to_str, tuple_to_dict
+from sql_tools import split_dict, join_dict, str_to_table, tuple_to_str, tuple_to_dict
 
-con = sqlite3.connect('weibo.db')
+con = sqlite3.connect('list.db')
 cursor = con.cursor()
 
 
@@ -70,20 +70,20 @@ def insert_batch(table_name, base_key_list, item_list):
 
 # -----------------------------------
 
-def update_data(table_name, set_dict, constraint_dict):
+def update_data(table_name, set_dict, condition_dict):
     """
     修改一条数据
-    :param table_name:表名
-    :param set_dict:需要修改的键-值 （支持列表）
-    :param constraint_dict: 约束的键-值（支持列表）
+    :param table_name:表名 \n
+    :param set_dict:需要修改的键-值 \n
+    :param condition_dict: 约束的键-值（支持列表）\n
     :return:
     """
-    set_str = cutting_dict(set_dict, '=')
-    if constraint_dict is None:
+    set_str = join_dict(set_dict, '=')
+    if condition_dict is None:
         command = f'update {table_name} set {set_str}'
     else:
-        constraint_str = cutting_dict(constraint_dict, '=', ' and ')
-        command = f'update {table_name} set {set_str} where {constraint_str}'
+        condition_str = join_dict(condition_dict, '=', ' and ')
+        command = f'update {table_name} set {set_str} where {condition_str}'
     return call(command)
 
 
@@ -94,7 +94,7 @@ def update_data(table_name, set_dict, constraint_dict):
 # -----------------------------------
 
 
-def data(table_name, constraint_dict):
+def data(table_name, constraint_dict=None):
     """
     查询一条记录
     :param constraint_dict: {要查的键名,要查的键值}
@@ -102,7 +102,7 @@ def data(table_name, constraint_dict):
     :return:元组
     """
     command = 'select * from {} where {}'.format(
-        table_name, cutting_dict(constraint_dict, '='))
+        table_name, join_dict(constraint_dict, '='))
     structure = table_structure(table_name)
     call_value = call(command)
     if call_value == 'error':
@@ -183,7 +183,7 @@ def del_data(table_name, constraint_dict=None):
     if constraint_dict is None:
         command = f'delete from {table_name}'
     else:
-        c_d_str = cutting_dict(constraint_dict, '=', ' and ')
+        c_d_str = join_dict(constraint_dict, '=', ' and ')
         command = 'delete from {} where {}'.format(table_name, c_d_str)
     return call(command)
 
