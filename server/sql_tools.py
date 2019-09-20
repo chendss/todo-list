@@ -26,8 +26,8 @@ def split_dict(k_v_dict):
         k_s.append(key)
         v_s.append('\'{}\''.format(k_v_dict[key]))
     return {
-        k_s: ', '.join(k_s),
-        v_s: ', '.join(v_s)
+        'k_s': ', '.join(k_s),
+        'v_s': ', '.join(v_s)
     }
 
 
@@ -46,3 +46,23 @@ def join_dict(source, connector, group_connector=''):
             obj_str_list.append('{} {} {}'.format(key, connector, value))
         result.append(', '.join(obj_str_list))
     return ' {} '.format(group_connector).join(result)
+
+
+def tuple_to_str(tuple_):
+    """
+    元组转字符串
+    """
+    return list(tuple_)[0]
+
+
+def tuple_to_dict(tuple, table_keys):
+    """
+    元组数组+表键集合生成对象 \n
+    :param tuple_list 元组数组 \n
+    :param table_keys 表键集合 \n
+    """
+    result = {}
+    for i, key in enumerate(table_keys):
+        value = tuple[i]
+        result[key] = value
+    return result

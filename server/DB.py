@@ -1,6 +1,6 @@
 import sqlite3
 import time
-from sql_tools import split_dict, join_dict, str_to_table, tuple_to_str, tuple_to_dict
+from sql_tools import split_dict, join_dict, str_to_table, tuple_to_dict, tuple_to_str
 
 con = sqlite3.connect('list.db')
 cursor = con.cursor()
@@ -42,7 +42,8 @@ def create_table(table_name, key_str):
     """
     command = 'create table {} ({})'.format(
         table_name, str_to_table(key_str))
-    return call(command)
+    if table_name not in all_table():
+        return call(command)
 
 
 def insert_batch(table_name, base_key_list, item_list):

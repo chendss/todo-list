@@ -24,7 +24,8 @@
               icon="icon-suo"></Icon>
           </ElementInput>
         </FormItem>
-        <FormItem prop="confirmPassword">
+        <FormItem prop="confirmPassword"
+          v-if="type!=='login'">
           <ElementInput type="password"
             placeholder="请确认密码"
             v-model="param.confirmPassword"
