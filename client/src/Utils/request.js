@@ -43,10 +43,13 @@ export const GET = async function(url, params) {
 
 export const POST = async function(url, requestData) {
 	let result = await request('post', url, requestData)
-	const { data, msg, success } = result
+	const body = get(result, 'data', {})
+	const { data, success } = body
+	const { msg } = data
 	if (success === false) {
 		const info = msg || '未知错误'
 		Message.error(info)
 		throw { info, result }
 	}
+	return data
 }

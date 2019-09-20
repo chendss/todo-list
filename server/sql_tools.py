@@ -43,7 +43,7 @@ def join_dict(source, connector, group_connector=''):
         obj_str_list = []
         for key in item.keys():
             value = item[key]
-            obj_str_list.append('{} {} {}'.format(key, connector, value))
+            obj_str_list.append('{}{}\'{}\''.format(key, connector, value))
         result.append(', '.join(obj_str_list))
     return ' {} '.format(group_connector).join(result)
 

@@ -1,4 +1,5 @@
 import { get } from '@utils/index'
+import { login, register } from './interface'
 import Icon from '@widget/Icon/index.vue'
 import { Message, Form, FormItem, Input, Button } from 'element-ui'
 
@@ -9,9 +10,9 @@ export default {
 	data() {
 		return {
 			param: {
-				username: '',
-				password: '',
-				confirmPassword: '',
+				username: 'test',
+				password: '123',
+				confirmPassword: '123',
 			},
 			rules: {
 				username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -36,8 +37,15 @@ export default {
 		},
 		submitForm() {
 			const msg = get(this, 'type', 'login') === 'login' ? '登录成功' : '注册成功'
-			this.$refs.user.validate(valid => {
+			this.$refs.user.validate(async valid => {
 				if (valid) {
+					const { username, password } = this.param
+					if (this.type === 'login') {
+						let logRes = await login(username, password)
+					} else {
+						let res = await register(username, password)
+						const { data, success } = res
+					}
 					message.success(msg)
 				}
 			})

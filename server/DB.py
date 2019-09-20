@@ -2,11 +2,15 @@ import sqlite3
 import time
 from sql_tools import split_dict, join_dict, str_to_table, tuple_to_dict, tuple_to_str
 
-con = sqlite3.connect('list.db')
+con = sqlite3.connect('list.db', check_same_thread=False)
 cursor = con.cursor()
+print('数据库构建')
 
 
-def commit_():
+def commit():
+    """
+    数据库提交函数
+    """
     con.commit()
 
 
@@ -95,11 +99,11 @@ def update_data(table_name, set_dict, condition_dict):
 # -----------------------------------
 
 
-def data(table_name, constraint_dict=None):
+def search_data(table_name, constraint_dict=None):
     """
-    查询一条记录
-    :param constraint_dict: {要查的键名,要查的键值}
-    :param table_name:要查的表名
+    查询一条记录 \n
+    :param constraint_dict: {要查的键名,要查的键值} \n
+    :param table_name:要查的表名 \n
     :return:元组
     """
     command = 'select * from {} where {}'.format(

@@ -1,10 +1,11 @@
 import json
 import time
-import datetime
-import subprocess
 import time
+import datetime
 import threading
+import subprocess
 from flask_cors import CORS
+from DB import create_table
 from user_info import user_info_api
 from flask import Flask, redirect, abort, make_response, jsonify, send_file, request
 
@@ -15,13 +16,12 @@ CORS(app, resources=r'/*')
 app.register_blueprint(user_info_api)
 
 
-@app.route('/', methods=['GET'])
-def index():
-    request.headers
-    return redirect('https://www.baidu.com')
+def mian():
+    create_table('user', 'id-id,user,pwd')
 
 
 if __name__ == '__main__':
+    mian()
     app.run(
         host='0.0.0.0',
         port=6382,

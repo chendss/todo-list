@@ -1,5 +1,5 @@
 class Store:
-    user_info_list = []
+    user_dict = {}
 
 
 globalStore = Store()
