@@ -1,7 +1,7 @@
 <template>
   <div class="user-wrap">
     <div class="ms-user">
-      <div class="ms-title">微软 TODO</div>
+      <div class="ms-title">简单 TODO</div>
       <Form :model="param"
         :validate-on-rule-change='true'
         :rules="rules"
