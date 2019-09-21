@@ -25,9 +25,9 @@ const vueInit = function() {
 }
 
 const vueEvent = function() {
-	flex()
-	window.addEventListener('load', flex)
-	window.addEventListener('resize', flex)
+	// flex()
+	// window.addEventListener('load', flex)
+	// window.addEventListener('resize', flex)
 }
 
 const main = function() {

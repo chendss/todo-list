@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import UserInfo from '@pages/UserInfo'
 import Home from '@pages/Home'
+import NotFound from '@pages/404'
 import VueRouter from 'vue-router'
 import { isMobile } from '@utils/flex'
 import DB from '@utils/DB'
@@ -19,25 +20,44 @@ const routeDict = {
 			component: UserInfo,
 			name: 'UserInfo',
 		},
+		{
+			path: '/404',
+			component: NotFound,
+			name: '404',
+		},
 	],
 }
 
 const route = new VueRouter(routeDict)
 
-route.beforeEach((to, form, next) => {
-	if (DB.get('token') == null) {
-		if (to.path === '/' || to.path.includes('userInfo')) {
-			next()
-		} else {
-			next('/')
-		}
-	} else {
-		next()
-	}
+const checkMobile = function() {
 	if (isMobile()) {
 		console.log('手机端')
 	} else {
 		console.log('pc端')
+	}
+}
+
+const checkRoute = function(to) {
+	const { path } = to
+	const routePaths = routeDict.routes.map(route => route.path)
+	return routePaths.includes(path) || path.includes('userInfo')
+}
+
+route.beforeEach((to, form, next) => {
+	if (checkRoute(to)) {
+		if (DB.get('token') == null) {
+			if (to.path === '/' || to.path.includes('userInfo')) {
+				next()
+			} else {
+				next('/')
+			}
+		} else {
+			next()
+		}
+		// checkMobile()
+	} else {
+		next('/404')
 	}
 })
 

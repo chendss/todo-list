@@ -1,10 +1,10 @@
 {
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/client/src/",
-    "@utils": "${workspaceRoot}/client/src/utils",
+    "@utils": "${workspaceRoot}/client/src/utils/",
     "@pages": "${workspaceRoot}/client/src/pages/",
     "@img": "${workspaceRoot}/client/src/assets/img",
-    "@icon": "${workspaceRoot}/client/src/assets/icon",
+    "@icon": "${workspaceRoot}/client/src/assets/icon/",
     "@widget": "${workspaceRoot}/client/src/Components/",
   }
 }

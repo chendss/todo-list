@@ -1,0 +1,70 @@
+.no-found-box {
+	@include full();
+	@include flex();
+	background: url('../../assets//img/bg.jpg') 50% / cover no-repeat fixed;
+	&::after {
+		@include full-abs();
+		position: absolute;
+		content: '';
+		background-color: rgba(60, 91, 147, 0.4);
+		background-image: -webkit-linear-gradient(-410deg, rgba(61, 66, 96, 0.4) 20%, rgba(21, 23, 34, 0.6));
+		background-image: linear-gradient(140deg, rgba(61, 66, 96, 0.4) 20%, rgba(21, 23, 34, 0.6));
+	}
+	> * {
+		position: relative;
+		z-index: 99;
+	}
+	.main {
+		@include flex();
+		flex-direction: column;
+		.avatar {
+			width: 200px;
+			height: 200px;
+			position: relative;
+			border-radius: 50%;
+			margin-bottom: 0.2em;
+			transition: all 0.8s;
+			border: 1px solid #482929;
+			box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+			img {
+				width: 100%;
+				border-radius: 50%;
+			}
+			&:hover {
+				transform: rotate(360deg);
+			}
+		}
+		h1 {
+			font-size: 2.5em;
+			line-height: 1.2em;
+			text-align: center;
+			margin-bottom: 15px;
+			p {
+				display: inline-block;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+				color: #fff;
+				text-decoration: none;
+				font-size: 100%;
+				font-weight: 400;
+				font-family: 'ff-tisa-web-pro-1', 'ff-tisa-web-pro-2', 'Lucida Grande', 'Hiragino Sans GB',
+					'Hiragino Sans GB W3', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+			}
+		}
+		.divider {
+			width: 100%;
+			margin: 20px auto;
+			border-top: 1px solid rgba(255, 255, 255, 0.24);
+		}
+		.info {
+			color: #fff;
+			margin: 0 30px;
+			font-weight: 400;
+			font-size: 1.2em;
+			line-height: 1.7em;
+		}
+		.secondary {
+			width: 30%;
+		}
+	}
+}

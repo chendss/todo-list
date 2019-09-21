@@ -17,8 +17,10 @@ app.register_blueprint(user_info_api)
 
 
 def mian():
-    create_table('user', 'id-id,user,pwd,name')
-    # create_table('log', 'id-id,user_id,pwd')
+    create_table('user', 'id-id,user,pwd,name,avatar')
+    create_table('list', 'id-id,name,user_id')
+    create_table(
+        'log', 'id-id,user_id,list_id,remarks,start_time,end_time,status,titps_time,repeat_time')
 
 
 if __name__ == '__main__':

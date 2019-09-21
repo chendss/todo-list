@@ -6,9 +6,16 @@ $blue-hover: #2e4ff1;
 	height: 100%;
 }
 
+@mixin full-abs {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
 @mixin flex-center() {
 	align-items: center;
-	justify-items: center;
+	justify-content: center;
 }
 
 @mixin flex() {
