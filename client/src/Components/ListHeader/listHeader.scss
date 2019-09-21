@@ -1,0 +1,62 @@
+.list-header {
+	height: 48px;
+	@include flex();
+	background-image: none;
+	padding: 0 10px 0 10px;
+	background-color: #0078d7;
+	background-repeat-x: repeat;
+	background-position: left top;
+	> p {
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: 600;
+		white-space: nowrap;
+		background-color: #0078d7;
+		font-family: SegoeUI-SemiBold-final, Segoe UI Semibold, SegoeUI-Regular-final, Segoe UI,
+			'Segoe UI Web (West European)', Segoe, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Tahoma,
+			Helvetica, Arial, sans-serif;
+	}
+	.search-box {
+		@include flex();
+		overflow: hidden;
+		width: 100%;
+		.search {
+			height: 32px;
+			width: 400px;
+			cursor: pointer;
+			@include flex();
+			padding-left: 10px;
+			justify-content: flex-start;
+			background: rgba(244, 246, 255, 0.8);
+			.search-text {
+				height: 100%;
+				margin-left: 10px;
+				input {
+					font-size: 16px;
+					height: 100%;
+					padding: 0;
+					background: transparent;
+					border: 0;
+					cursor: pointer;
+					&::placeholder {
+						color: #346fef;
+					}
+					&:focus {
+						cursor: auto !important;
+					}
+				}
+				.el_input__suffix {
+					height: 100%;
+					i {
+						&::before {
+							@include full-abs();
+						}
+					}
+				}
+			}
+			&:hover {
+				background: #fff;
+			}
+		}
+	}
+}

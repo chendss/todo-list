@@ -3,6 +3,7 @@ import UserInfo from '@pages/UserInfo'
 import Home from '@pages/Home'
 import NotFound from '@pages/404'
 import VueRouter from 'vue-router'
+import List from '@pages/List'
 import { isMobile } from '@utils/flex'
 import DB from '@utils/DB'
 
@@ -25,6 +26,11 @@ const routeDict = {
 			component: NotFound,
 			name: '404',
 		},
+		{
+			path: '/list',
+			component: List,
+			name: 'list',
+		},
 	],
 }
 
@@ -45,6 +51,7 @@ const checkRoute = function(to) {
 }
 
 route.beforeEach((to, form, next) => {
+	const { path } = to
 	if (checkRoute(to)) {
 		if (DB.get('token') == null) {
 			if (to.path === '/' || to.path.includes('userInfo')) {
@@ -52,6 +59,8 @@ route.beforeEach((to, form, next) => {
 			} else {
 				next('/')
 			}
+		} else if (path.includes('userInfo')) {
+			next('/list')
 		} else {
 			next()
 		}

@@ -4,5 +4,5 @@ export default {
 	data() {
 		return {}
 	},
-	Components: { ListHeader },
+	components: { ListHeader },
 }
