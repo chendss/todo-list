@@ -1,5 +1,6 @@
 import { get } from '@utils/index'
-import { login, register } from './interface'
+import { action } from './interface'
+import DB from '@utils/DB'
 import Icon from '@widget/Icon/index.vue'
 import { Message, Form, FormItem, Input, Button } from 'element-ui'
 
@@ -10,20 +11,21 @@ export default {
 	data() {
 		return {
 			param: {
-				username: 'test',
-				password: '123',
-				confirmPassword: '123',
+				username: 'dashao',
+				password: 'cyl1314',
+				confirmPassword: 'cyl1314',
 			},
 			rules: {
 				username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
 				password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 				confirmPassword: [{ validator: this.confirmPwdValidator, trigger: 'change' }],
 			},
-			type: '',
 		}
 	},
-	mounted() {
-		this.type = get(this, '$route.params.type', 'login')
+	computed: {
+		type() {
+			return get(this, '$route.params.type', 'login')
+		},
 	},
 	methods: {
 		confirmPwdValidator(rule, value, callback) {
@@ -40,15 +42,20 @@ export default {
 			this.$refs.user.validate(async valid => {
 				if (valid) {
 					const { username, password } = this.param
-					if (this.type === 'login') {
-						let logRes = await login(username, password)
-					} else {
-						let res = await register(username, password)
-						const { data, success } = res
-					}
+					let res = await action(this.type, username, password)
 					message.success(msg)
+					DB.set('token', { token: res })
+					this.$router.push('/list')
 				}
 			})
+		},
+		userChange() {
+			const type = get(this, '$route.params.type', 'login')
+			if (type === 'login') {
+				this.$router.push('/userInfo/register')
+			} else {
+				this.$router.push('/userInfo/login')
+			}
 		},
 	},
 }

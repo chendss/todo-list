@@ -5,8 +5,11 @@ import '@icon/iconfont.css'
 import router from './Route'
 import flex from '@utils/flex.js'
 import { isMobile } from '@utils/flex.js'
+import VueLoading from 'vue-loading-template'
 
-const vueUse = function() {}
+const vueUse = function() {
+	Vue.use(VueLoading)
+}
 
 const vueSetting = function() {
 	Vue.config.productionTip = false

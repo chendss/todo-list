@@ -32,6 +32,7 @@ module.exports = {
 				data: `@import "@/assets/global.scss";`,
 			},
 		},
-	},
+  },
+  
 	productionSourceMap: false,
 }

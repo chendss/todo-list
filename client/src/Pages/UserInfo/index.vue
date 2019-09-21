@@ -36,13 +36,15 @@
         </FormItem>
         <div class="user-btn">
           <Button type="primary"
+            id="userInfo"
             @click="submitForm()">{{type==='login'?'登录':'注册'}}</Button>
         </div>
         <div class="footer">
           <p class="user-tips">Tips : 请输入用户名和密码。</p>
-          <Icon icon='icon-zhuce'
-            title='注册'
-            class="register"></Icon>
+          <Icon :icon='type==="login"?"icon-zhuce":"icon-yidiandiantubiao08"'
+            @click="userChange"
+            :title="type==='login'?'注册':'登录'"
+            class="user-change"></Icon>
         </div>
       </Form>
     </div>

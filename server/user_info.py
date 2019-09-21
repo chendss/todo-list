@@ -13,13 +13,14 @@ def login():
     api_param = request.get_json()
     user = api_param.get('user')
     pwd = api_param.get('pwd')
-    if pwd == None or user == None:
-        resp = err_factory('用户名或密码不能为空')
-        return resp
-    token = rand_string(64)
-    globalStore.user_dict[user] = token
-    print('更新token', globalStore.user_dict)
-    return api_factory(token)
+    db_value = search_data('user', {'user': user})
+    if db_value == None or db_value['pwd'] != pwd:
+        return err_factory({'msg': '用户名或者密码错误'})
+    else:
+        token = rand_string(64)
+        globalStore.user_dict[user] = token
+        print('更新token', globalStore.user_dict)
+        return api_factory(token)
 
 
 @user_info_api.route('/register', methods=['POST'])

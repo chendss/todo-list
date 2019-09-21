@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { get } from './index'
 import { Message } from 'element-ui'
+import Loading from './loading'
+
+const loading = new Loading()
+const Info = Message
 
 axios.interceptors.response.use(
 	response => {
@@ -38,17 +42,30 @@ const request = function(method, url, data) {
 }
 
 export const GET = async function(url, params) {
+	loading.open()
 	let result = await request('get', url, params)
+	const body = get(result, 'data', {})
+	const { data, success } = body
+	const { msg } = data
+	loading.close()
+	if (success === false) {
+		const info = msg || '未知错误'
+		Info.error(info)
+		throw { info, result }
+	}
+	return data
 }
 
 export const POST = async function(url, requestData) {
+	loading.open()
 	let result = await request('post', url, requestData)
 	const body = get(result, 'data', {})
 	const { data, success } = body
 	const { msg } = data
+	loading.close()
 	if (success === false) {
 		const info = msg || '未知错误'
-		Message.error(info)
+		Info.error(info)
 		throw { info, result }
 	}
 	return data

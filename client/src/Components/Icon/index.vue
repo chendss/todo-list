@@ -5,7 +5,8 @@
 </style>
 
 <template>
-  <div class="icon-box">
+  <div class="icon-box"
+    @click="iconClick">
     <i :class="iconName"></i>
   </div>
 </template>
@@ -17,11 +18,17 @@ export default {
   props: ['icon'],
   data () {
     return {
-      iconName: 'iconfont '
     }
   },
-  mounted () {
-    this.iconName += get(this, 'icon', '')
+  computed: {
+    iconName () {
+      return 'iconfont ' + get(this, 'icon', '')
+    }
+  },
+  methods: {
+    iconClick () {
+      this.$emit('click')
+    }
   },
 }
 </script>
