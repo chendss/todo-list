@@ -1,17 +1,20 @@
 <template>
   <div class="list-header">
-    <p>TO DO</p>
+    <p>欢迎来到 TO DO {{name||''}}</p>
     <div class="search-box">
       <div class="search">
         <Icon icon="icon-sousuo"
           class="icon"></Icon>
         <EleInput class="search-text"
           placeholder="搜索"
+          @change="searchChange"
           v-model="searchText"></EleInput>
       </div>
     </div>
     <div class="user-control">
-      <div class="user-avatar"></div>
+      <div class="user-avatar">
+        <img :src="imgSrc">
+      </div>
     </div>
   </div>
 </template>

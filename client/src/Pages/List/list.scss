@@ -1,2 +1,11 @@
 .list-box {
+	height: 100%;
+	.content {
+		@include flex();
+		height: 100%;
+		.side-bar {
+			height: 100%;
+			margin-right: auto;
+		}
+	}
 }

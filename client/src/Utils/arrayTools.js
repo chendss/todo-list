@@ -10,7 +10,7 @@ export const castArray = function(val) {
 	if (typeZh(val) === '数组') {
 		return val
 	} else {
-		return [val]
+		return [val].map(item => item)
 	}
 }
 
