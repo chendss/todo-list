@@ -3,18 +3,22 @@ export default function () {
     {
       name: '我的一天',
       icon: 'icon-icon-',
+      type: 'oneDay'
     },
     {
       name: '重要',
       icon: 'icon-wujiaoxing',
+      type: 'important'
     },
     {
       name: '已计划日程',
       icon: 'icon-kalendar',
+      type: 'alread'
     },
     {
       name: '任务',
       icon: 'icon-home',
+      type: 'task'
     },
   ]
 }

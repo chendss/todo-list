@@ -1,8 +1,6 @@
 <template>
   <Menu default-active="1"
     class="side-bar-menu"
-    @open="handleOpen"
-    @close="handleClose"
     :collapse="!open"
     text-color="#34373d;"
     active-text-color="#2e5cdb">
@@ -21,7 +19,7 @@
     <MenuItem v-for="(menu, index) in menuList"
       class="menu-item"
       :key="index"
-      :index="index+''">
+      :index="(index+1)+''">
     <Icon :icon="menu.icon"
       class="icon icon-item"></Icon>
     <span slot='title'>{{menu.name}}</span>
