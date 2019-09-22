@@ -1,12 +1,19 @@
 <template>
   <div class="list-side-bar">
-    <Menu default-active="2"
+    <Menu default-active="1"
       class="side-bar-menu"
       @open="handleOpen"
       @close="handleClose"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
+      :collapse="!open"
+      text-color="#34373d;"
+      active-text-color="#2e5cdb">
+      <div class="side-icon-box">
+        <div class="icon-background-box"
+          @click="collapse">
+          <Icon icon="icon-zhedie"
+            class="icon"></Icon>
+        </div>
+      </div>
       <Submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>

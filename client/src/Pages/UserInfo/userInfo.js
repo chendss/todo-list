@@ -43,7 +43,7 @@ export default {
 				if (valid) {
 					const { username, password } = this.param
 					let res = await action(this.type, username, password)
-					message.success(msg)
+					message.success({ message: msg, duration: 1000 })
 					DB.set('token', { token: res })
 					this.$router.push('/list')
 				}
@@ -51,11 +51,8 @@ export default {
 		},
 		userChange() {
 			const type = get(this, '$route.params.type', 'login')
-			if (type === 'login') {
-				this.$router.push('/userInfo/register')
-			} else {
-				this.$router.push('/userInfo/login')
-			}
+			const suffix = type === 'login' ? 'register' : 'login'
+			this.$router.push(`/userInfo/${suffix}`)
 		},
 	},
 }

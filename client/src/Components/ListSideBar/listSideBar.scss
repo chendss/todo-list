@@ -1,6 +1,39 @@
 .list-side-bar {
+	* {
+		transition: width 0.2s;
+	}
+	&:not(.el-menu--collapse) {
+		width: 250px;
+	}
 	.side-bar-menu {
 		height: 100%;
-		width: 300px;
+		background: #f4f4f4;
+		border-right: 1px solid #eaeaea;
+		.side-icon-box {
+			width: 64px;
+			@include inline-flex();
+			padding: 10px 0 10px 0px;
+			.icon-background-box {
+				padding: 10px;
+				cursor: pointer;
+				display: inline-flex;
+				&:hover {
+					background-color: #fafafa;
+					box-shadow: 0 0 0 1px #ededed;
+					-webkit-box-shadow: 0 0 0 1px #ededed;
+				}
+				::v-deep {
+					.icon {
+						i {
+							width: 24px;
+							height: 18px;
+							color: #465efc;
+							font-size: 18px;
+							@include inline-flex();
+						}
+					}
+				}
+			}
+		}
 	}
 }
