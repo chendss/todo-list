@@ -6,34 +6,35 @@ import router from './Route'
 import flex from '@utils/flex.js'
 import { isMobile } from '@utils/flex.js'
 import VueLoading from 'vue-loading-template'
+import 'element-ui/lib/theme-chalk/index.css'
 
-const vueUse = function() {
-	Vue.use(VueLoading)
+const vueUse = function () {
+  Vue.use(VueLoading)
 }
 
-const vueSetting = function() {
-	Vue.config.productionTip = false
-	Vue.prototype.$mobile = isMobile()
+const vueSetting = function () {
+  Vue.config.productionTip = false
+  Vue.prototype.$mobile = isMobile()
 }
 
-const vueInit = function() {
-	new Vue({
-		store,
-		router,
-		render: h => h(App),
-	}).$mount('#app')
+const vueInit = function () {
+  new Vue({
+    store,
+    router,
+    render: h => h(App),
+  }).$mount('#app')
 }
 
-const vueEvent = function() {
-	// flex()
-	// window.addEventListener('load', flex)
-	// window.addEventListener('resize', flex)
+const vueEvent = function () {
+  // flex()
+  // window.addEventListener('load', flex)
+  // window.addEventListener('resize', flex)
 }
 
-const main = function() {
-	vueUse()
-	vueEvent()
-	vueSetting()
-	vueInit()
+const main = function () {
+  vueUse()
+  vueEvent()
+  vueSetting()
+  vueInit()
 }
 main()

@@ -1,3 +1,4 @@
 server/__pycache__/*
 .vscode/.ropeproject/config.py
 server/*.db
+server/__pycache__/*.pyc
