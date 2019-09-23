@@ -20,7 +20,7 @@
       class="menu-item"
       :key="index"
       :index="(index+1)+''">
-    <Icon :icon="menu.icon"
+    <Icon :icon="menu.type==='custom'?'icon-zhedie':menu.icon"
       class="icon icon-item"></Icon>
     <span slot='title'>{{menu.name}}</span>
     </MenuItem>

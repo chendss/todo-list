@@ -1,11 +1,12 @@
 import { POST } from '@utils/request'
+import DB from '@utils/DB'
 
 export const login = async (user, pwd) => {
-	return await POST('/login', { user, pwd })
+  return await POST('/login', { user, pwd })
 }
 
 export const register = async (user, pwd) => {
-	return await POST('/register', { user, pwd })
+  return await POST('/register', { user, pwd })
 }
 
 /**
@@ -16,9 +17,13 @@ export const register = async (user, pwd) => {
  * @param {*} pwd
  * @returns
  */
-export const action = async function(type, user, pwd) {
-	if (type === 'login') {
-		return await login(user, pwd)
-	}
-	return await register(user, pwd)
+export const action = async function (type, user, pwd) {
+  let res = null
+  if (type === 'login') {
+    res = await login(user, pwd)
+  } else {
+    res = await register(user, pwd)
+  }
+  DB.set('token', { token: res })
+  return res
 }

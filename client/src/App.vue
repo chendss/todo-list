@@ -6,12 +6,14 @@
 </template>
 
 <script>
+import { updateToken } from '@utils/request.js'
+
 export default {
   name: 'app',
   components: {
   },
   created () {
-
+    updateToken()
   },
 }
 </script>

@@ -4,7 +4,7 @@ from sql_tools import split_dict, join_dict, str_to_table, tuple_to_dict, tuple_
 
 con = sqlite3.connect('list.db', check_same_thread=False)
 cursor = con.cursor()
-print('数据库构建')
+print('DB Created')
 
 
 def commit():
@@ -99,9 +99,9 @@ def update_data(table_name, set_dict, condition_dict):
 # -----------------------------------
 
 
-def search_data(table_name, constraint_dict=None):
+def search_data(table_name, constraint_dict=None, batch=False):
     """
-    查询一条记录 \n
+    查询记录 \n
     :param constraint_dict: {要查的键名,要查的键值} \n
     :param table_name:要查的表名 \n
     :return:元组
@@ -109,14 +109,13 @@ def search_data(table_name, constraint_dict=None):
     command = 'select * from {} where {}'.format(
         table_name, join_dict(constraint_dict, '='))
     structure = table_structure(table_name)
-    call_value = call(command)
-    if call_value == 'error':
-        return 'error'
+    db_data = call(command)
+    if db_data == 'error':
+        return None
     else:
-        if len(call_value) == 1:
-            db_data = call_value[0]
-            key_value_dict = tuple_to_dict(db_data, structure)
-            return key_value_dict
+        if len(db_data) >= 1:
+            result = [tuple_to_dict(data, structure) for data in db_data]
+            return result[0] if batch == False else result
         else:
             return None
 

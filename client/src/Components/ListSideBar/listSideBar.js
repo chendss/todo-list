@@ -1,6 +1,7 @@
-import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox } from 'element-ui'
+import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox, Message } from 'element-ui'
 import Icon from '@/Components/Icon'
 import menu from '@/Route/menu'
+import { getMenu, addMenu } from './interface'
 
 export default {
   data () {
@@ -10,6 +11,10 @@ export default {
     }
   },
   components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon },
+  async mounted () {
+    let extraList = await getMenu()
+    this.menuList = this.menuList.concat(extraList)
+  },
   methods: {
     collapse () {
       this.open = !this.open
@@ -20,10 +25,14 @@ export default {
         cancelButtonText: '取消',
       })
       const { value } = res
-      this.menuList.push({
+      const data = {
         name: value,
-        icon: 'icon-zhedie',
         type: 'custom'
+      }
+      await addMenu(data)
+      this.menuList.push({
+        ...data,
+        icon: 'icon-zhedie',
       })
     }
   },

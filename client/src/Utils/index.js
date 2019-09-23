@@ -1,4 +1,4 @@
-import { DB } from './DB'
+import DB from './DB'
 import { get, merge } from './lodashPro'
 import { type, typeZh } from './objectTools'
 import { castArray, nth } from './arrayTools'
