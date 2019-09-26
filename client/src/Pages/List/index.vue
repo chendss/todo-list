@@ -1,8 +1,13 @@
 <template>
   <div class="list-box">
-    <ListHeader></ListHeader>
+    <ListHeader :EventEmitter="EventEmitter"
+      :title="title"></ListHeader>
     <div class="content">
-      <ListSideBar class="side-bar"></ListSideBar>
+      <ListSideBar class="side-bar"
+        :EventEmitter="EventEmitter"
+        :title="title"></ListSideBar>
+      <ListContent class="content-list"
+        :EventEmitter="EventEmitter"></ListContent>
     </div>
   </div>
 </template>

@@ -1,5 +1,6 @@
 <template>
   <Menu default-active="1"
+    @select="onSelect"
     class="side-bar-menu"
     :collapse="!open"
     text-color="#34373d;"

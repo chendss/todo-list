@@ -45,7 +45,6 @@ def register():
 
 @user_info_api.route('/upToken', methods=['GET'])
 def upToken():
-    api_param = request.args
-    token = api_param.get('token')
+    token = request.headers.get('token')
     next_token = rand_string(64)
     return api_factory(next_token, token)

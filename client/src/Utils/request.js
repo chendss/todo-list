@@ -58,7 +58,7 @@ const request = function (method, url, data) {
 export const updateToken = async function () {
   const token = get(DB.get('token'), 'token', null)
   if (token != null) {
-    let nextToken = await GET('/upToken', { token })
+    let nextToken = await GET('/upToken')
     DB.set('token', { token: nextToken })
     return true
   }

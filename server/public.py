@@ -1,6 +1,6 @@
 import json
 from flask import make_response
-from DB import search_data, update_data
+from DB import search_data, update_data, table
 
 
 def api_factory(body, token):
@@ -31,7 +31,7 @@ def err_factory(msg, extra=None, code=200):
 
 def user_id_by_token(token):
     user_data = search_data('user', {'token': token})
-    print('找到一个什么', user_data)
+    print('找到一个什么', table('user'))
     if user_data == None:
         return None
     else:
