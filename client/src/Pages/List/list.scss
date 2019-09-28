@@ -1,11 +1,12 @@
 .list-box {
-	height: 100%;
-	.content {
-		@include flex();
-		height: 100%;
-		.side-bar {
-			height: 100%;
-			margin-right: auto;
-		}
-	}
+  height: 100%;
+  .content {
+    @include flex();
+    align-items: flex-start;
+    height: 100%;
+    .side-bar {
+      height: 100%;
+      margin-right: auto;
+    }
+  }
 }

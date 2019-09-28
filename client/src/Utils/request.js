@@ -10,21 +10,17 @@ const Info = Message
 const interceptorsErr = err => {
   // 对响应错误做些什么
   const response = get(err, 'response', { status: -500 })
-  const body = get(response, 'data', null)
   const status = get(response, 'status', 200)
-  let result = {
+  let result = get(response, 'data', {
     data: {
-      msg: get(body, 'msg', '未知的错误')
+      msg: '未知的错误'
     },
     success: false,
     status: response.status,
-  }
+  })
   if (status === 401) {
     DB.clear()
     route.goHome()
-  }
-  if (body != null) {
-    result = body
   }
   return Promise.resolve({ data: result })
 }

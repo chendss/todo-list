@@ -31,7 +31,6 @@ def err_factory(msg, extra=None, code=200):
 
 def user_id_by_token(token):
     user_data = search_data('user', {'token': token})
-    print('找到一个什么', table('user'))
     if user_data == None:
         return None
     else:

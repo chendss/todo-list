@@ -1,6 +1,11 @@
 <template>
   <div class="list-content">
-    <h1>{{title||'暂无'}}</h1>
+    <div class="title-box">
+      <h1>{{title||'暂无'}}</h1>
+      <div class="p-siff">
+        <p>...</p>
+      </div>
+    </div>
     <div class="main-list-box">
       <div class="tasks">
         <div class="task"></div>
