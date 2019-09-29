@@ -1,10 +1,15 @@
 .list-content {
-  width: 100%;
+  @include full();
   display: flex;
-  .title-box {
+  flex-direction: column;
+  @mixin base {
     display: flex;
+    width: 100%;
     align-items: center;
     padding: 12px 16px 0 16px;
+  }
+  .title-box {
+    @include base();
     font-family: 'Microsoft Yahei', 微软雅黑, STXihei, 'Meiryo UI', Meiryo,
       メイリオ, 'ＭＳ Ｐゴシック', 'MS PGothic', 'Hiragino Kaku Gothic Pro',
       'Arial Unicode MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -17,12 +22,16 @@
     }
     .p-siff {
       $width: 30px;
+      position: relative;
       @include inline-flex();
       width: $width;
       height: $width;
       cursor: pointer;
       line-height: $width;
-      p {
+      &::before {
+        content: '...';
+        position: absolute;
+        @include full-abs();
         @include inline-flex();
       }
       &:hover {
@@ -30,5 +39,154 @@
         background: #ededed;
       }
     }
+  }
+  .main-list-box {
+    @include base();
+    @include flex();
+    @mixin content {
+      display: flex;
+      margin-left: -12px;
+      @include full();
+      min-height: 52px;
+      align-items: center;
+      position: relative;
+      word-wrap: break-word;
+      word-break: break-word;
+      padding: 0 12px;
+      box-shadow: 0 17px 0 -16px #e5e5e5;
+      flex-wrap: wrap;
+    }
+    flex-direction: column;
+    .yuan {
+      $blue: #3e69e4;
+      $w: 24;
+      width: $w * 1px;
+      height: $w * 1px;
+      padding: (32-$w) * 1px;
+      @include inline-flex();
+      margin-right: auto;
+      border-radius: 50%;
+      border: 1px solid $blue;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        &::after {
+          content: '✔';
+          display: inline-block;
+          border-top-width: 0;
+          border-right-width: 0;
+          position: absolute;
+          color: $blue;
+        }
+      }
+    }
+    .tasks {
+      padding-left: 8px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .task {
+        @include content();
+        &:hover {
+          background-color: #f5f5f5;
+          box-shadow: inset 0 0 0 1px #f5f5f5;
+        }
+
+        .task-text {
+          font-size: 1rem;
+          font-weight: 500;
+          color: #34373d;
+          cursor: default;
+          position: relative;
+          flex: 1 1 0px;
+          min-height: 52px;
+          padding: 8px 12px;
+          line-height: 2rem;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        .success {
+          width: 32px;
+          height: 32px;
+          @include inline-flex();
+          margin-right: auto;
+          ::v-deep {
+            i {
+              font-size: 1.5rem;
+            }
+          }
+        }
+
+        .check {
+          @extend .yuan;
+          &::after {
+            content: '✔';
+            display: inline-block;
+            border-top-width: 0;
+            border-right-width: 0;
+            position: absolute;
+            color: $blue;
+          }
+        }
+        .star {
+          width: 32px;
+          height: 32px;
+          @include inline-flex();
+          margin-left: auto;
+          ::v-deep {
+            i {
+              font-size: 1.5rem;
+              color: $blue;
+            }
+            i.off {
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+    }
+    .add-task {
+      @include content();
+      align-items: center;
+      .add {
+        width: 24px;
+        height: 24px;
+        @include inline-flex();
+        margin-right: auto;
+        cursor: pointer;
+        ::v-deep {
+          i {
+            font-size: 1.5rem;
+            color: $blue;
+          }
+        }
+      }
+      .add-text {
+        flex: 1 1 auto;
+        padding: 8px 12px;
+        &::placeholder {
+          color: $blue;
+        }
+      }
+      .focus {
+        &::placeholder {
+          color: #34373d;
+        }
+      }
+    }
+  }
+  .backgroundLines {
+    width: calc(100% - 66px);
+    margin: 0 24px;
+    flex: 1;
+    background: linear-gradient(
+      180deg,
+      white,
+      white 52px,
+      #e5e5e5 52px,
+      #e5e5e5 52px
+    );
+    background-size: 100% 53px;
+    border-top: 1px solid #e5e5e5;
   }
 }

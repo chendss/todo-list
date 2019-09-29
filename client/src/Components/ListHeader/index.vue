@@ -13,7 +13,7 @@
     </div>
     <div class="user-control">
       <div class="user-avatar">
-        <img :src="imgSrc">
+        <img :src="imgSrc" @click="updateToken">
       </div>
     </div>
   </div>
