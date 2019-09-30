@@ -2,7 +2,7 @@ import json
 from tools import rand_string
 from flask import Blueprint, request
 from DB import commit, search_data, insert_data
-from public import api_factory, err_factory, set_token, update_data, is_login
+from public import api_factory, err_factory, set_token, update_data, check_login
 
 user_info_api = Blueprint('user_info_api', __name__)
 
@@ -44,11 +44,10 @@ def register():
 
 
 @user_info_api.route('/upToken', methods=['GET'])
+@check_login
 def upToken():
     token = request.headers.get('token')
     next_token = rand_string(64)
-    if is_login(token) == True:
-        update_data('user', {'token': next_token}, {'token': token})
-        commit()
-        return api_factory(next_token, next_token)
-    return err_factory('该用户未登录', None, 401)
+    update_data('user', {'token': next_token}, {'token': token})
+    commit()
+    return api_factory(next_token, next_token)

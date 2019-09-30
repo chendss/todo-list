@@ -22,7 +22,7 @@ def mian():
     create_table('user', 'id-id,user,pwd,name,avatar,token')
     create_table('list', 'id-id,name,user_id,type')
     create_table(
-        'log', 'id-id,user_id,list_id,remarks,start_time,end_time,status,titps_time,repeat_time')
+        'log', 'id-id,user_id,list_id,remarks,content,start_time,end_time,status,titps_time,repeat_time')
 
 
 if __name__ == '__main__':
