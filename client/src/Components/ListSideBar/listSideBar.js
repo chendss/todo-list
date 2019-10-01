@@ -1,30 +1,34 @@
 import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox } from 'element-ui'
 import Icon from '@/Components/Icon'
-import menu from '@/Route/menu'
 import { get } from '@utils/index.js'
+import { uniqBy } from 'lodash'
 import { getMenu, addMenu } from './interface'
 
 export default {
   data () {
     return {
       open: true,
-      menuList: menu(),
+      menuList: [],
     }
   },
   props: ['EventEmitter', 'title'],
   components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon },
-  async mounted () {
-    let extraList = await getMenu()
-    this.menuList = this.menuList.concat(extraList)
+  mounted () {
+    this.reloadList()
   },
   methods: {
+    async reloadList () {
+      let extraList = await getMenu()
+      let menuList = this.menuList.concat(extraList)
+      this.menuList = uniqBy(menuList, 'id')
+    },
     collapse () {
       this.open = !this.open
     },
     onSelect (index, indexPath) {
       const pathList = indexPath.map(path => `[${path - 1}]`)
       const target = get(this.menuList, pathList.join('.'), {})
-      this.EventEmitter.emit('menuChange', target.name)
+      this.EventEmitter.emit('menuChange', target)
     },
     async add () {
       if (!this.open) return
@@ -38,10 +42,7 @@ export default {
         type: 'custom'
       }
       await addMenu(data)
-      this.menuList.push({
-        ...data,
-        icon: 'icon-zhedie',
-      })
+      this.reloadList()
     }
   },
 }

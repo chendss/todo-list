@@ -1,10 +1,28 @@
 import json
 from tools import rand_string
 from flask import Blueprint, request
-from DB import commit, search_data, insert_data
+from DB import commit, search_data, insert_data, insert_batch, commit
 from public import api_factory, err_factory, set_token, update_data, check_login
 
 user_info_api = Blueprint('user_info_api', __name__)
+
+
+def create_menu(user):
+    """
+    创建用户的基础清单
+    """
+    keys = []
+    values = []
+    user_id = search_data('user', {"user": user})['id']
+    with open('./base_menu.json', 'r') as f:
+        read_file = json.loads(f.read())
+        for menu in read_file:
+            menu['id'] = rand_string(64)
+            menu['user_id'] = user_id
+            list_menu = list(menu.values())
+            values.append(tuple(list_menu))
+        keys = list(read_file[0].keys())
+    insert_batch('list', keys, values)
 
 
 @user_info_api.route('/login', methods=['POST'])
@@ -20,7 +38,7 @@ def login():
         set_token(user, token)
         commit()
         print('更新token', user, token)
-        return api_factory(token, 'Login')
+        return api_factory(token)
 
 
 @user_info_api.route('/register', methods=['POST'])
@@ -37,8 +55,9 @@ def register():
         })
         token = rand_string(64)
         set_token(user, token)
+        create_menu(user)
         commit()
-        return api_factory(token, 'Login')
+        return api_factory(token)
     else:
         return err_factory('该用户已存在', None, 403)
 
@@ -50,4 +69,4 @@ def upToken():
     next_token = rand_string(64)
     update_data('user', {'token': next_token}, {'token': token})
     commit()
-    return api_factory(next_token, next_token)
+    return api_factory(next_token)

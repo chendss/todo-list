@@ -1,9 +1,11 @@
 import json
+import urllib
 from flask import make_response, request
 from DB import search_data, update_data, table
 
 
-def api_factory(body, token):
+def api_factory(body):
+    change_obj(body)
     resp = make_response()
     model = {
         'data': body,
@@ -55,3 +57,20 @@ def check_login(func):
             return err_factory('该用户未登录', None, 401)
     wrap.__name__ = func.__name__
     return wrap
+
+
+def change_obj(obj):
+    if not isinstance(obj, list) and not isinstance(obj, dict):
+        return obj
+    content = obj if isinstance(obj, list) else [obj]
+    for item in content:
+        for key in item.keys():
+            if item[key] == 'False':
+                item[key] = False
+            elif item[key] == 'True':
+                item[key] = True
+
+
+def unquote(s):
+    result = urllib.parse.unquote('http://'+s).replace('http://', '')
+    return result

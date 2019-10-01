@@ -1,5 +1,6 @@
 <template>
-  <div class="list-content">
+  <div class="list-content"
+    v-if="!!id">
     <div class="title-box">
       <h1>{{title||'暂无'}}</h1>
       <div class="p-siff">
@@ -10,9 +11,10 @@
         <div class="task"
           v-for="(task, index) in thatTasks"
           :key="index">
-          <div :class="`${task.status?'yuan':'check'}`">
+          <div :class="`${!task.status?'yuan':'check'}`"
+            @click="changeLog(index,'collection',!task.collection)">
           </div>
-          <div class="task-text">{{task.text}}</div>
+          <div class="task-text">{{task.content}}</div>
           <Icon class="star"
             :icon="task.collection?'el-icon-star-on':'el-icon-star-off off'"></Icon>
         </div>
@@ -25,8 +27,10 @@
           v-if="addFocus">
         </div>
         <input :class="`${addFocus?'add-text focus':'add-text'}`"
+          v-model="text"
           @blur="()=>focusChange(false)"
           @focus="()=>focusChange(true)"
+          @keypress="addTask"
           placeholder="添加任务">
       </div>
     </div>
