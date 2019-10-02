@@ -12,9 +12,14 @@
       </div>
     </div>
     <div class="user-control">
-      <div class="user-avatar">
-        <img :src="imgSrc" @click="updateToken">
-      </div>
+      <Dropdown class="user-avatar"
+        @command="dropCommand">
+        <img :src="imgSrc">
+        <DropdownMenu slot="dropdown">
+          <DropdownItem command="out">退出</DropdownItem>
+          <DropdownItem command="update">更新token</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </div>
   </div>
 </template>

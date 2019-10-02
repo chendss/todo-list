@@ -72,13 +72,13 @@
 			height: 100%;
 			padding: 2px;
 			@include flex();
+			cursor: pointer;
 			overflow: hidden;
 			&:hover {
 				background: #005a9e;
 			}
 			img {
 				border-radius: 50%;
-				cursor: pointer;
 			}
 		}
 	}
