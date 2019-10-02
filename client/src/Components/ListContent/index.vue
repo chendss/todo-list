@@ -12,10 +12,18 @@
           v-for="(task, index) in thatTasks"
           :key="index">
           <div :class="`${!task.status?'yuan':'check'}`"
-            @click="changeLog(index,'collection',!task.collection)">
+            @click="changeLog(index,'status',!task.status)">
           </div>
-          <div class="task-text">{{task.content}}</div>
+          <input class="task-text"
+            :style="task.status?'text-decoration: line-through;color: #767678;':''"
+            v-model="task.content">
+          <Button type="danger"
+            class="delete"
+            @click="delLog(index)"
+            icon="el-icon-delete"
+            circle></Button>
           <Icon class="star"
+            @click="changeLog(index,'collection',!task.collection)"
             :icon="task.collection?'el-icon-star-on':'el-icon-star-off off'"></Icon>
         </div>
       </div>
@@ -30,7 +38,7 @@
           v-model="text"
           @blur="()=>focusChange(false)"
           @focus="()=>focusChange(true)"
-          @keypress="addTask"
+          @keypress="addKeypress"
           placeholder="添加任务">
       </div>
     </div>

@@ -12,3 +12,7 @@ export const addLog = async function (id, data) {
 export const writeLog = async function (logId, data) {
   return POST(`/changeLog/${encodeURIComponent(logId)}`, data)
 }
+
+export const delLog = async function (id) {
+  return POST(`/delLog/${encodeURIComponent(id)}`)
+}

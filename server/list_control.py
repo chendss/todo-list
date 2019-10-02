@@ -33,29 +33,3 @@ def add_list():
         'type': type_
     })
     return api_factory(True)
-
-
-@list_api.route('/getLog/<list_id>', methods=['GET'])
-@check_login
-def get_log(list_id):
-    id_ = unquote(list_id)
-    data = search_data('log', {'list_id': id_}, True)
-    result = data if isinstance(data, list) else []
-    return api_factory(result)
-
-
-@list_api.route('/addLog/<list_id>', methods=['POST'])
-@check_login
-def add_log(list_id):
-    id_ = unquote(list_id)
-    api_param = request.get_json()
-    item = {
-        'list_id': id_,
-        'id': rand_string(64),
-        'status': False,
-        'collection': False,
-        'content': api_param['text']
-    }
-    insert_data('log', item)
-    commit()
-    return api_factory(True)
