@@ -14,7 +14,7 @@ def create_menu(user):
     keys = []
     values = []
     user_id = search_data('user', {"user": user})['id']
-    with open('./base_menu.json', 'r') as f:
+    with open('./base_menu.json', 'r', encoding='utf-8') as f:
         read_file = json.loads(f.read())
         for menu in read_file:
             menu['id'] = rand_string(64)

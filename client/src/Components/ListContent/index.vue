@@ -15,6 +15,8 @@
             @click="changeLog(index,'status',!task.status)">
           </div>
           <input class="task-text"
+            @blur="()=>changeLog(index,'content',task.content)"
+            @keypress="()=>changeLog(index,'content',task.content)"
             :style="task.status?'text-decoration: line-through;color: #767678;':''"
             v-model="task.content">
           <Button type="danger"
@@ -23,6 +25,7 @@
             icon="el-icon-delete"
             circle></Button>
           <Icon class="star"
+            v-if="!task.status"
             @click="changeLog(index,'collection',!task.collection)"
             :icon="task.collection?'el-icon-star-on':'el-icon-star-off off'"></Icon>
         </div>
