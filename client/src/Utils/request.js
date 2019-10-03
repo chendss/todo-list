@@ -8,7 +8,7 @@ const loading = new Loading()
 const Info = Message
 
 const apiRequest = {
-	production: !window.location.href.includes('https') ? 'http://d.bjong.me:6362' : 'https://listServer.bjong.me',
+	production: !window.location.href.includes('https') ? 'http://d.bjong.me:6362' : 'https://listServer.dashao.me',
 	development: 'http://127.0.0.1:6382',
 }
 
