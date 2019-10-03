@@ -1,6 +1,9 @@
 <style lang="scss">
 .icon-box {
   @include inline-flex();
+  .font-16 {
+    font-size: 16px;
+  }
 }
 </style>
 
@@ -22,7 +25,13 @@ export default {
   },
   computed: {
     iconName () {
-      return 'iconfont ' + get(this, 'icon', '')
+      const name = get(this, 'icon', '')
+      if (name.includes('el-icon')) {
+        return name + ' font-16'
+      } else {
+
+        return 'iconfont ' + name
+      }
     }
   },
   methods: {
