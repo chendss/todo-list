@@ -14,6 +14,7 @@ export default {
 			title: 'oo',
 			addFocus: false,
 			text: '',
+			keepText: '',
 		}
 	},
 	props: ['EventEmitter'],
@@ -67,7 +68,11 @@ export default {
 			}
 			this.addFocus = false
 		},
+		onFocus(event) {
+			this.keepText = get(event, 'target.value', '')
+		},
 		async changeLog(index, key, value) {
+			if (value === this.keepText) return
 			const obj = this.thatTasks[index]
 			const { id } = obj
 			await writeLog(id, { [key]: value })

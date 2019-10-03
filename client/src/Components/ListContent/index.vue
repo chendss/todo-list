@@ -15,6 +15,7 @@
             @click="changeLog(index,'status',!task.status)">
           </div>
           <input class="task-text"
+            @focus="onFocus"
             @blur="()=>changeLog(index,'content',task.content)"
             @keypress="()=>changeLog(index,'content',task.content)"
             :style="task.status?'text-decoration: line-through;color: #767678;':''"
