@@ -7,87 +7,89 @@ import route from '@/Route/index'
 const loading = new Loading()
 const Info = Message
 
-const interceptorsErr = err => {
-  // 对响应错误做些什么
-  const response = get(err, 'response', { status: -500 })
-  const status = get(response, 'status', 200)
-  let result = get(response, 'data', {
-    data: {
-      msg: '未知的错误'
-    },
-    success: false,
-    status: response.status,
-  })
-  if (status === 401) {
-    DB.clear()
-    route.goHome()
-  }
-  return Promise.resolve({ data: result })
+const apiRequest = {
+	production: window.location.href.includes('http') ? 'http://d.bjong.me:6362' : 'https://listServer.bjong.me',
+	development: 'http://127.0.0.1:6382',
 }
 
-axios.interceptors.response.use(
-  response => {
-    return response
-  },
-  interceptorsErr
-)
-
-const request = function (method, url, data) {
-  const config = {
-    url,
-    method,
-    baseURL: 'http://127.0.0.1:6382',
-    timeout: 6000
-  }
-  if (['post', 'put'].includes(method.toLowerCase())) {
-    config.data = data
-  } else {
-    config.params = data
-  }
-  const token = get(DB.get('token'), 'token', null)
-  if (token != null) {
-    config.headers = { token }
-  }
-  return axios(config)
+const interceptorsErr = function(err) {
+	// 对响应错误做些什么
+	const response = get(err, 'response', { status: -500 })
+	const status = get(response, 'status', 200)
+	let result = get(response, 'data', {
+		data: {
+			msg: '未知的错误',
+		},
+		success: false,
+		status: response.status,
+	})
+	if (status === 401) {
+		DB.clear()
+		route.goHome()
+	}
+	return Promise.resolve({ data: result })
 }
 
-export const updateToken = async function () {
-  const token = get(DB.get('token'), 'token', null)
-  if (token != null) {
-    let nextToken = await GET('/upToken')
-    DB.set('token', { token: nextToken })
-    return true
-  }
-  route.goHome()
-  return false
+axios.interceptors.response.use(response => {
+	return response
+}, interceptorsErr)
+
+const request = function(method, url, data) {
+	const config = {
+		url,
+		method,
+		baseURL: apiRequest[process.env.NODE_ENV],
+		timeout: 6000,
+	}
+	if (['post', 'put'].includes(method.toLowerCase())) {
+		config.data = data
+	} else {
+		config.params = data
+	}
+	const token = get(DB.get('token'), 'token', null)
+	if (token != null) {
+		config.headers = { token }
+	}
+	return axios(config)
 }
 
-export const GET = async function (url, params) {
-  loading.open()
-  let result = await request('get', url, params)
-  const body = get(result, 'data', {})
-  const { data, success } = body
-  loading.close()
-  if (success === false) {
-    const { msg } = data
-    const info = msg || '未知错误'
-    Info.error(info)
-    throw { info, result, url, method: 'get' }
-  }
-  return data
+export const updateToken = async function() {
+	const token = get(DB.get('token'), 'token', null)
+	if (token != null) {
+		let nextToken = await GET('/upToken')
+		DB.set('token', { token: nextToken })
+		return true
+	}
+	route.goHome()
+	return false
 }
 
-export const POST = async function (url, requestData) {
-  loading.open()
-  let result = await request('post', url, requestData)
-  const body = get(result, 'data', {})
-  const { data, success } = body
-  loading.close()
-  if (success === false || success == null) {
-    const { msg } = data
-    const info = msg || '未知错误'
-    Info.error(info)
-    throw { info, result, url, method: 'post' }
-  }
-  return data
+export const GET = async function(url, params) {
+	loading.open()
+	let result = await request('get', url, params)
+	const body = get(result, 'data', {})
+	const { data, success } = body
+	loading.close()
+	if (success === false) {
+		const { msg } = data
+		const info = msg || '未知错误'
+		Info.error(info)
+		throw { info, result, url, method: 'get' }
+	}
+	return data
+}
+
+export const POST = async function(url, requestData) {
+	loading.open()
+	let result = await request('post', url, requestData)
+	const body = get(result, 'data', {})
+	const { data, success } = body
+	loading.close()
+	if (success === false || success == null) {
+		const { msg } = data
+		const info = msg || '未知错误'
+		Info.error(info)
+		throw { info, result, url, method: 'post' }
+	}
+	return data
 }
