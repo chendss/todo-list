@@ -1,6 +1,7 @@
 <template>
   <div class="list-box">
     <ListHeader :EventEmitter="EventEmitter"
+      class="header-list"
       :title="title"></ListHeader>
     <div class="content">
       <ListSideBar class="side-bar"

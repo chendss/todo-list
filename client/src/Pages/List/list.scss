@@ -1,12 +1,27 @@
 .list-box {
-  height: 100%;
-  .content {
-    @include flex();
-    align-items: flex-start;
-    height: 100%;
-    .side-bar {
-      height: 100%;
-      margin-right: auto;
-    }
-  }
+	height: 100%;
+	.content {
+		@include flex();
+		align-items: flex-start;
+		height: 100%;
+		position: relative;
+		@media only screen and (max-width: 500px) {
+			@mixin base {
+				position: absolute;
+			}
+			.side-bar {
+				height: 100%;
+				margin-right: auto;
+				z-index: 99;
+			}
+			.side-bar {
+				@include base();
+				left: 0;
+			}
+			.content-list {
+				@include base();
+				left: 64px;
+			}
+		}
+	}
 }

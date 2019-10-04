@@ -1,7 +1,9 @@
 .list-content {
-	@include full();
+	height: 100%;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	flex: 1 1 auto;
 	@mixin base {
 		display: flex;
 		width: 100%;
@@ -13,7 +15,7 @@
 		font-family: 'Microsoft Yahei', 微软雅黑, STXihei, 'Meiryo UI', Meiryo, メイリオ, 'ＭＳ Ｐゴシック',
 			'MS PGothic', 'Hiragino Kaku Gothic Pro', 'Arial Unicode MS', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		h1 {
-			font-size: 2rem;
+			font-size: 1.5rem;
 			font-weight: 600;
 			white-space: nowrap;
 			color: #3e69e4;

@@ -2,7 +2,9 @@
 	height: 100%;
 	overflow: hidden;
 	background: #f4f4f4;
+	position: relative;
 	border-right: 1px solid #eaeaea;
+	margin-right: auto;
 	&:not(.el-menu--collapse) {
 		width: 200px;
 	}

@@ -1,20 +1,25 @@
 .list-header {
 	height: 48px;
 	@include flex();
+	width: 100vw;
 	background-image: none;
 	padding: 0 0 0 10px;
-	background-color: #0078d7;
-	background-repeat-x: repeat;
+	background: #0078d7;
 	background-position: left top;
 	> p {
 		color: #ffffff;
+		@include inline-flex();
 		font-size: 16px;
+		height: 100%;
 		font-weight: 600;
 		white-space: nowrap;
-		background-color: #0078d7;
+		background: #0078d7;
 		font-family: SegoeUI-SemiBold-final, Segoe UI Semibold, SegoeUI-Regular-final, Segoe UI,
 			'Segoe UI Web (West European)', Segoe, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Tahoma,
 			Helvetica, Arial, sans-serif;
+	}
+	> div {
+		background: #0078d7;
 	}
 	.search-box {
 		@include flex();
@@ -22,6 +27,7 @@
 		width: 100%;
 		padding-left: 10px;
 		padding-right: 10px;
+		height: 100%;
 		.search {
 			border-radius: 5px;
 			height: 32px;
