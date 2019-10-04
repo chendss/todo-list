@@ -9,25 +9,26 @@
     <div class="main-list-box">
       <div class="tasks">
         <div class="task"
+          v-touch:longtap="()=>longtap(index)"
           v-for="(task, index) in thatTasks"
           :key="index">
           <div :class="`${!task.status?'yuan':'check'}`"
-            v-touch:tap="changeLog(index,'status',!task.status)">
+            v-touch:tap="()=>changeLog(index,'status','bool')">
           </div>
           <input class="task-text"
             @focus="onFocus"
-            @blur="()=>changeLog(index,'content',task.content)"
-            @keypress="()=>changeLog(index,'content',task.content)"
+            @blur="()=>changeLog(index,'content')"
+            @keypress="()=>changeLog(index,'content')"
             :style="task.status?'text-decoration: line-through;color: #767678;':''"
             v-model="task.content">
           <Button type="danger"
             class="delete"
-            v-touch:tap="delLog(index)"
+            @click="delLog(index)"
             icon="el-icon-delete"
             circle></Button>
           <Icon class="star"
             v-if="!task.status"
-            v-touch:tap="changeLog(index,'collection',!task.collection)"
+            v-touch:tap="()=>changeLog(index,'collection','bool')"
             :icon="task.collection?'el-icon-star-on':'el-icon-star-off off'"></Icon>
         </div>
       </div>

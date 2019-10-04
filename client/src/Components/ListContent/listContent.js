@@ -1,6 +1,6 @@
 import Icon from '@/Components/Icon'
-import { get } from '@utils/index'
-import { Button, Message } from 'element-ui'
+import { get, isMobile } from '@utils/index'
+import { Button, Message, MessageBox } from 'element-ui'
 import { getLog, addLog, writeLog, delLog } from './interface'
 
 const Msg = Message
@@ -25,10 +25,12 @@ export default {
 			for (let task of tasks) {
 				if (task.status) {
 					bottomTasks.push(task)
-				} else if (task.collect) {
-					topTasks.push(task)
 				} else {
-					normalTasks.push(task)
+					if (task.collection) {
+						topTasks.push(task)
+					} else {
+						normalTasks.push(task)
+					}
 				}
 			}
 			const result = [].concat(topTasks, normalTasks, bottomTasks)
@@ -36,6 +38,7 @@ export default {
 		},
 	},
 	mounted() {
+		console.log('list content init')
 		this.EventEmitter.addListener('menuChange', this.onMenChange)
 	},
 	methods: {
@@ -71,10 +74,15 @@ export default {
 		onFocus(event) {
 			this.keepText = get(event, 'target.value', '')
 		},
-		async changeLog(index, key, value) {
+		async changeLog(index, key, handleType = 'string') {
+			let value = get(this.thatTasks, `[${index}].${key}`, null)
+			if (handleType === 'bool') {
+				value = !value
+			}
 			if (value === this.keepText && key === 'content') return
 			const obj = this.thatTasks[index]
 			const { id } = obj
+
 			await writeLog(id, { [key]: value })
 			this.tasks = await getLog(this.id)
 			Msg.success('修改成功')
@@ -85,6 +93,17 @@ export default {
 			await delLog(id)
 			Msg.success('删除成功')
 			this.tasks = await getLog(this.id)
+		},
+		longtap(index) {
+			if (isMobile() === true) {
+				MessageBox.confirm('是否删除该项？', '警告', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'error',
+				}).then(() => {
+					this.delLog(index)
+				})
+			}
 		},
 	},
 }

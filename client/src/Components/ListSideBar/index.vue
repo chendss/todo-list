@@ -12,7 +12,7 @@
           class="icon icon-side"></Icon>
       </div>
       <div class="icon-background-box"
-        v-touch:tap="add">
+        @click="add">
         <Icon icon="el-icon-plus"
           class="icon-plus"></Icon>
       </div>
