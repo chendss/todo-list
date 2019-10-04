@@ -11,8 +11,8 @@ export default {
 		const userInfo = DB.get('userInfo')
 		return {
 			param: {
-				username: get(userInfo, 'admin', ''),
-				password: get(userInfo, 'pwd', ''),
+				username: get(userInfo, 'username', ''),
+				password: get(userInfo, 'password', ''),
 				confirmPassword: '',
 			},
 			rules: {
@@ -48,6 +48,7 @@ export default {
 					} else {
 						await action(this.type, username, password)
 						message.success({ message: msg, duration: 1000 })
+						DB.set('userInfo', { password, username })
 						this.$router.push('/list')
 					}
 				}
