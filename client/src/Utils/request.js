@@ -6,10 +6,11 @@ import route from '@/Route/index'
 
 const loading = new Loading()
 const Info = Message
+const { href, protocol, hostname } = window.location
 
 const apiRequest = {
-	production: !window.location.href.includes('https') ? 'http://d.bjong.me:6382' : 'https://listServer.dashao.me',
-	development: 'http://127.0.0.1:6382',
+	production: !href.includes('https') ? 'http://d.bjong.me:6382' : 'https://listServer.dashao.me',
+	development: href.includes('localhost') ? 'http://127.0.0.1:6382' : `${protocol}//${hostname}:6382`,
 }
 
 const interceptorsErr = function(err) {

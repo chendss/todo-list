@@ -94,7 +94,7 @@ export default {
 			Msg.success('删除成功')
 			this.tasks = await getLog(this.id)
 		},
-		longtap(index) {
+		swipeLeft(index) {
 			if (isMobile() === true) {
 				MessageBox.confirm('是否删除该项？', '警告', {
 					confirmButtonText: '确定',

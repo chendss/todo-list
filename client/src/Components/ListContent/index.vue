@@ -9,7 +9,7 @@
     <div class="main-list-box">
       <div class="tasks">
         <div class="task"
-          v-touch:longtap="()=>longtap(index)"
+          v-touch:swipe.left="()=>swipeLeft(index)"
           v-for="(task, index) in thatTasks"
           :key="index">
           <div :class="`${!task.status?'yuan':'check'}`"
