@@ -7,12 +7,12 @@
     active-text-color="#2e5cdb">
     <div class="side-action-box">
       <div class="icon-background-box"
-        @click="collapse">
+        v-touch:tap="collapse">
         <Icon icon="icon-zhedie"
           class="icon icon-side"></Icon>
       </div>
       <div class="icon-background-box"
-        @click="add">
+        v-touch:tap="add">
         <Icon icon="el-icon-plus"
           class="icon-plus"></Icon>
       </div>

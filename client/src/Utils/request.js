@@ -16,9 +16,11 @@ const interceptorsErr = function(err) {
 	// 对响应错误做些什么
 	const response = get(err, 'response', { status: -500 })
 	const status = get(response, 'status', 200)
+	const url = get(err, 'config.url', '')
+	const requestData = get(err, 'config.data', '')
 	let result = get(response, 'data', {
 		data: {
-			msg: '未知的错误',
+			msg: `接口报错,地址为 ${url},参数为 ${requestData}`,
 		},
 		success: false,
 		status: response.status,
@@ -26,6 +28,9 @@ const interceptorsErr = function(err) {
 	if (status === 401) {
 		DB.clear()
 		route.goHome()
+	}
+	if (process.env.NODE_ENV === 'development') {
+		alert(JSON.stringify(err))
 	}
 	return Promise.resolve({ data: result })
 }

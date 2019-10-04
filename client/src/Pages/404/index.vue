@@ -2,7 +2,7 @@
   <div class="no-found-box">
     <div class="main">
       <div class="avatar"
-        @click="goBack"
+        v-touch:tap="goBack"
         title="回到首页">
         <img src="@/assets/img/头像.jpg">
       </div>

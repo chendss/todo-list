@@ -1,71 +1,71 @@
 .side-bar-menu {
-  height: 100%;
-  overflow: hidden;
-  background: #f4f4f4;
-  border-right: 1px solid #eaeaea;
-  &:not(.el-menu--collapse) {
-    width: 250px;
-  }
-  .side-action-box {
-    width: 64px;
-    margin-left: 20px;
-    @include inline-flex();
-    padding: 10px 0 10px 0px;
-    .icon-background-box {
-      padding: 10px;
-      height: 37px;
-      cursor: pointer;
-      display: inline-flex;
-      &:hover {
-        background-color: #fafafa;
-        box-shadow: 0 0 0 1px #ededed;
-        -webkit-box-shadow: 0 0 0 1px #ededed;
-      }
-    }
-  }
-  .icon-side,
-  .icon-plus {
-    color: #465efc;
-  }
-  .menu-item {
-    .icon-item {
-      margin-right: 0.5em;
-    }
-    span {
-      color: #767678;
-    }
-    ::v-deep {
-      .icon {
-        i {
-          width: 24px;
-          height: 18px;
-          font-size: 18px;
-          color: #767678;
-          @include inline-flex();
-        }
+	height: 100%;
+	overflow: hidden;
+	background: #f4f4f4;
+	border-right: 1px solid #eaeaea;
+	&:not(.el-menu--collapse) {
+		width: 200px;
+	}
+	.side-action-box {
+		width: 64px;
+		margin-left: 20px;
+		@include inline-flex();
+		padding: 10px 0 10px 0px;
+		.icon-background-box {
+			padding: 10px;
+			height: 37px;
+			cursor: pointer;
+			display: inline-flex;
+			&:hover {
+				background-color: #fafafa;
+				box-shadow: 0 0 0 1px #ededed;
+				-webkit-box-shadow: 0 0 0 1px #ededed;
+			}
+		}
+	}
+	.icon-side,
+	.icon-plus {
+		color: #465efc;
+	}
+	.menu-item {
+		.icon-item {
+			margin-right: 0.5em;
+		}
+		span {
+			color: #767678;
+		}
+		::v-deep {
+			.icon {
+				i {
+					width: 24px;
+					height: 18px;
+					font-size: 18px;
+					color: #767678;
+					@include inline-flex();
+				}
 
-        .icon-icon- {
-          font-size: 30px;
-        }
-        .icon-wujiaoxing {
-          font-size: 20px;
-        }
-      }
-    }
-    &:hover {
-      background-color: #f5f5f5;
-      background: #fafafa;
-    }
-  }
-  .is-active {
-    background: #ededed !important;
-    ::v-deep {
-      i {
-        color: #2e5cdb !important;
-      }
-    }
-    span {
-      color: #2e5cdb;
-    }
-  }
+				.icon-icon- {
+					font-size: 30px;
+				}
+				.icon-wujiaoxing {
+					font-size: 20px;
+				}
+			}
+		}
+		&:hover {
+			background-color: #f5f5f5;
+			background: #fafafa;
+		}
+	}
+	.is-active {
+		background: #ededed !important;
+		::v-deep {
+			i {
+				color: #2e5cdb !important;
+			}
+		}
+		span {
+			color: #2e5cdb;
+		}
+	}
 }

@@ -72,7 +72,7 @@ export default {
 			this.keepText = get(event, 'target.value', '')
 		},
 		async changeLog(index, key, value) {
-			if (value === this.keepText) return
+			if (value === this.keepText && key === 'content') return
 			const obj = this.thatTasks[index]
 			const { id } = obj
 			await writeLog(id, { [key]: value })

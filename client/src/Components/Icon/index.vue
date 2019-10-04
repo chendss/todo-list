@@ -9,7 +9,7 @@
 
 <template>
   <div class="icon-box"
-    @click="iconClick">
+    v-touch:tap="iconClick">
     <i :class="iconName"></i>
   </div>
 </template>

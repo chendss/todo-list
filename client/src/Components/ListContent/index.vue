@@ -12,7 +12,7 @@
           v-for="(task, index) in thatTasks"
           :key="index">
           <div :class="`${!task.status?'yuan':'check'}`"
-            @click="changeLog(index,'status',!task.status)">
+            v-touch:tap="changeLog(index,'status',!task.status)">
           </div>
           <input class="task-text"
             @focus="onFocus"
@@ -22,12 +22,12 @@
             v-model="task.content">
           <Button type="danger"
             class="delete"
-            @click="delLog(index)"
+            v-touch:tap="delLog(index)"
             icon="el-icon-delete"
             circle></Button>
           <Icon class="star"
             v-if="!task.status"
-            @click="changeLog(index,'collection',!task.collection)"
+            v-touch:tap="changeLog(index,'collection',!task.collection)"
             :icon="task.collection?'el-icon-star-on':'el-icon-star-off off'"></Icon>
         </div>
       </div>

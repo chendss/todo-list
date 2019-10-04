@@ -3,12 +3,14 @@ import store from '@stores'
 import App from './App.vue'
 import '@icon/iconfont.css'
 import router from './Route'
-import { isMobile } from '@utils/flex.js'
 import { Icon } from 'element-ui'
+import { isMobile } from '@utils/flex.js'
 import 'element-ui/lib/theme-chalk/index.css'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 const vueUse = function() {
 	Vue.use(Icon)
+	Vue.use(Vue2TouchEvents)
 }
 
 const vueSetting = function() {
