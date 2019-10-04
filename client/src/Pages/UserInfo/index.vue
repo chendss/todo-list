@@ -37,7 +37,7 @@
         <div class="user-btn">
           <Button type="primary"
             id="userInfo"
-            v-touch:tap="submitForm()">{{type==='login'?'登录':'注册'}}</Button>
+            @click="submitForm()">{{type==='login'?'登录':'注册'}}</Button>
         </div>
         <div class="footer">
           <p class="user-tips">Tips : 请输入用户名和密码。</p>
