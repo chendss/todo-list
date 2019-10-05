@@ -17,7 +17,7 @@ def create_menu(user):
     with open('./base_menu.json', 'r', encoding='utf-8') as f:
         read_file = json.loads(f.read())
         for menu in read_file:
-            menu['id'] = rand_string(64)
+            menu['id'] = rand_string()
             menu['user_id'] = user_id
             list_menu = list(menu.values())
             values.append(tuple(list_menu))
@@ -34,7 +34,7 @@ def login():
     if db_value == None or db_value['pwd'] != pwd:
         return err_factory('用户名或者密码错误', None, 403)
     else:
-        token = rand_string(64)
+        token = rand_string()
         set_token(user, token)
         commit()
         print('更新token', user, token)
@@ -49,11 +49,11 @@ def register():
     db_value = search_data('user', {'user': user})
     if db_value == None:
         insert_data('user', {
-            'id': rand_string(64),
+            'id': rand_string(),
             'user': user,
             'pwd': pwd
         })
-        token = rand_string(64)
+        token = rand_string()
         set_token(user, token)
         create_menu(user)
         commit()
@@ -66,7 +66,7 @@ def register():
 @check_login
 def upToken():
     token = request.headers.get('token')
-    next_token = rand_string(64)
+    next_token = rand_string()
     update_data('user', {'token': next_token}, {'token': token})
     commit()
     return api_factory(next_token)

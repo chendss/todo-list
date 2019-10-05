@@ -50,7 +50,7 @@ def add_log(list_id):
     api_param = request.get_json()
     item = {
         'list_id': id_,
-        'id': rand_string(64),
+        'id': rand_string(),
         'status': False,
         'user_id': user_id,
         'collection': False,

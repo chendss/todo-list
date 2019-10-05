@@ -69,6 +69,8 @@ def change_obj(obj):
                 item[key] = False
             elif item[key] == 'True':
                 item[key] = True
+            elif item[key] == 'None':
+                item[key] = None
 
 
 def unquote(s):

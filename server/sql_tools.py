@@ -9,9 +9,9 @@ def str_to_table(key_str):
     for key in key_str.split(','):
         if '-id' in key:
             read_key = key.split('-')[0]
-            result.append('{} varchar(20) primary key'.format(read_key))
+            result.append('{} BLOB primary key'.format(read_key))
         else:
-            result.append('{} varchar(20)'.format(key))
+            result.append('{} BLOB'.format(key))
     return ', '.join(result)
 
 
