@@ -2,6 +2,7 @@ import axios from 'axios'
 import { get, DB } from './index'
 import { Message } from 'element-ui'
 import route from '@/Route/index'
+import Loading from './loading'
 
 const Info = Message
 const { href, protocol, hostname } = window.location
@@ -31,6 +32,7 @@ const interceptorsErr = function(err) {
 	if (process.env.NODE_ENV === 'development') {
 		alert(JSON.stringify(err))
 	}
+	Loading.close()
 	return Promise.resolve({ data: result })
 }
 

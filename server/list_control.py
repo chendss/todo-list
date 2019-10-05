@@ -29,7 +29,7 @@ def add_list():
     insert_data('list', {
         'user_id': user_id,
         'name': name,
-        'id': rand_string(64),
+        'id': rand_string(),
         'type': type_
     })
     return api_factory(True)
