@@ -75,7 +75,7 @@ export const GET = async function(url, params) {
 	let result = await request('get', url, params)
 	const body = get(result, 'data', {})
 	const { data, success } = body
-	await loading.close()
+	loading.close()
 	if (success === false) {
 		const { msg } = data
 		const info = msg || '未知错误'
@@ -90,7 +90,7 @@ export const POST = async function(url, requestData) {
 	let result = await request('post', url, requestData)
 	const body = get(result, 'data', {})
 	const { data, success } = body
-	await loading.close()
+	loading.close()
 	if (success === false || success == null) {
 		const { msg } = data
 		const info = msg || '未知错误'

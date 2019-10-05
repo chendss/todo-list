@@ -3,17 +3,18 @@ import { Loading } from 'element-ui'
 class MyLoading {
 	constructor() {
 		this.loadingInstance = null
+		this.n = 0
 	}
 	open = (...args) => {
 		this.loadingInstance = Loading.service(...args)
+		this.n++
 	}
 	close = () => {
-		return new Promise(resolve => {
-			setTimeout(() => {
-				this.loadingInstance.close()
-				resolve()
-			}, 0)
-		})
+		this.n--
+		this.n = Math.max(0, this.n)
+		if (this.n === 0) {
+			this.loadingInstance.close()
+		}
 	}
 }
 
