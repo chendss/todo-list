@@ -21,6 +21,7 @@ export default {
 				await updateToken()
 				Msg.success('更新token成功')
 			} else if (command === 'out') {
+        DB.clear()
 				this.$router.push('/')
 			}
 		},
