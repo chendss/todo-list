@@ -9,7 +9,6 @@
     <div class="main-list-box">
       <div class="tasks">
         <div class="task"
-          v-touch:swipe.left="()=>swipeLeft(index)"
           v-for="(task, index) in thatTasks"
           :key="index">
           <div :class="`${!task.status?'yuan':'check'}`"
@@ -23,6 +22,7 @@
             v-model="task.content">
           <Button type="danger"
             class="delete"
+            :style="$mobile?'opacity:1':''"
             @click="delLog(index)"
             icon="el-icon-delete"
             circle></Button>
