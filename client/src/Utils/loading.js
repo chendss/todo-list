@@ -13,7 +13,9 @@ class MyLoading {
 		this.n--
 		this.n = Math.max(0, this.n)
 		if (this.n === 0) {
-			this.loadingInstance.close()
+			setTimeout(() => {
+				this.loadingInstance.close()
+			}, 10)
 		}
 	}
 }
