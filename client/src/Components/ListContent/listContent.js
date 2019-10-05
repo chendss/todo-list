@@ -1,6 +1,7 @@
 import Icon from '@/Components/Icon'
 import { get, isMobile } from '@utils/index'
 import { Button, Message, MessageBox, Input } from 'element-ui'
+import Loading from '@utils/loading'
 import { getLog, addLog, writeLog, delLog } from './interface'
 
 const Msg = Message
@@ -58,7 +59,9 @@ export default {
 			const { name, id } = target
 			this.title = name
 			this.id = id
+			Loading.open()
 			let res = await getLog(id)
+			Loading.close()
 			this.tasks = res
 		},
 		addKeypress(event) {
@@ -71,8 +74,10 @@ export default {
 			const id = this.id
 			const text = this.text
 			if (get(text, 'length', 0) > 0) {
+				Loading.open()
 				await addLog(id, { text })
 				this.tasks = await getLog(this.id)
+				Loading.close()
 				this.text = ''
 			}
 			this.addFocus = false
@@ -89,17 +94,20 @@ export default {
 			if (value === this.keepText && key === 'content') return
 			const obj = this.thatTasks[index]
 			const { id } = obj
-
+			Loading.open()
 			await writeLog(id, { [key]: value })
 			this.tasks = await getLog(this.id)
+			Loading.close()
 			Msg.success('修改成功')
 		},
 		async delLog(index) {
 			const obj = this.thatTasks[index]
 			const { id } = obj
+			Loading.open()
 			await delLog(id)
+			this.tasks = await getLog(this.id)
 			Msg.success('删除成功')
-      this.tasks = await getLog(this.id)
+			Loading.close()
 		},
 		swipeLeft(index) {
 			if (isMobile() === true) {

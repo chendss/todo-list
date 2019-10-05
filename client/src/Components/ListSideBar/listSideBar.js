@@ -1,8 +1,9 @@
-import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox } from 'element-ui'
-import Icon from '@/Components/Icon'
-import { get } from '@utils/index.js'
 import { uniqBy } from 'lodash'
+import Icon from '@/Components/Icon'
+import Loading from '@utils/loading'
+import { get } from '@utils/index.js'
 import { getMenu, addMenu } from './interface'
+import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox } from 'element-ui'
 
 export default {
 	data() {
@@ -16,14 +17,15 @@ export default {
 	components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon },
 	mounted() {
 		this.reloadList()
-		console.log('fuck', this.EventEmitter)
 		this.EventEmitter.addListener('heightChange', height => {
 			this.height = height
 		})
 	},
 	methods: {
 		async reloadList() {
+			Loading.open()
 			let extraList = await getMenu()
+			Loading.close()
 			let menuList = this.menuList.concat(extraList)
 			this.menuList = uniqBy(menuList, 'id')
 		},
@@ -46,6 +48,7 @@ export default {
 				name: value,
 				type: 'custom',
 			}
+			Loading.open()
 			await addMenu(data)
 			this.reloadList()
 		},

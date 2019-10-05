@@ -2,6 +2,7 @@ import { get, DB } from '@utils/index'
 import { action } from './interface'
 import Icon from '@widget/Icon/index.vue'
 import { Message, Form, FormItem, Input, Button } from 'element-ui'
+import Loading from '@utils/loading'
 
 const message = Message
 
@@ -47,7 +48,9 @@ export default {
 						DB.set('token', { token: 'debug' })
 						this.$router.push('/list')
 					} else {
+						Loading.open()
 						await action(this.type, username, password)
+						Loading.close()
 						message.success({ message: msg, duration: 1000 })
 						DB.set('userInfo', { password, username })
 						this.$router.push('/list')

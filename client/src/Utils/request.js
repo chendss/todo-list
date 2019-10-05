@@ -1,10 +1,8 @@
 import axios from 'axios'
 import { get, DB } from './index'
 import { Message } from 'element-ui'
-import Loading from './loading'
 import route from '@/Route/index'
 
-const loading = new Loading()
 const Info = Message
 const { href, protocol, hostname } = window.location
 
@@ -71,11 +69,9 @@ export const updateToken = async function() {
 }
 
 export const GET = async function(url, params) {
-	loading.open()
 	let result = await request('get', url, params)
 	const body = get(result, 'data', {})
 	const { data, success } = body
-	loading.close()
 	if (success === false) {
 		const { msg } = data
 		const info = msg || '未知错误'
@@ -86,11 +82,9 @@ export const GET = async function(url, params) {
 }
 
 export const POST = async function(url, requestData) {
-	loading.open()
 	let result = await request('post', url, requestData)
 	const body = get(result, 'data', {})
 	const { data, success } = body
-	loading.close()
 	if (success === false || success == null) {
 		const { msg } = data
 		const info = msg || '未知错误'
