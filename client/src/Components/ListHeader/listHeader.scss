@@ -1,5 +1,5 @@
 .list-header {
-	height: 48px;
+	height: $header-height * 1px;
 	@include flex();
 	width: 100vw;
 	background-image: none;

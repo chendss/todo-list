@@ -4,10 +4,11 @@ import ListContent from '@/Components/ListContent'
 import { EventEmitter } from 'events'
 
 export default {
-  data () {
-    return {
-      EventEmitter: new EventEmitter(), title: ''
-    }
-  },
-  components: { ListHeader, ListSideBar, ListContent },
+	data() {
+		return {
+			EventEmitter: new EventEmitter(),
+			title: '',
+		}
+	},
+	components: { ListHeader, ListSideBar, ListContent },
 }

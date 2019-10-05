@@ -1,6 +1,6 @@
 <template>
   <div class="list-content"
-    v-if="!!id">
+    :style="!!id?'opacity:1':'opacity:0'">
     <div class="title-box">
       <h1>{{title||'暂无'}}</h1>
       <div class="p-siff">

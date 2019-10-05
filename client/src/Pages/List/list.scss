@@ -3,23 +3,22 @@
 	.content {
 		@include flex();
 		align-items: flex-start;
-		height: 100%;
 		position: relative;
+		min-height: calc(100vh - #{$header-height * 1px});
+		.content-list {
+		}
 		@media only screen and (max-width: 500px) {
-			@mixin base {
-				position: absolute;
-			}
 			.side-bar {
 				height: 100%;
 				margin-right: auto;
 				z-index: 99;
 			}
 			.side-bar {
-				@include base();
+				position: absolute;
 				left: 0;
 			}
 			.content-list {
-				@include base();
+				padding-left: 64px;
 				left: 64px;
 			}
 		}

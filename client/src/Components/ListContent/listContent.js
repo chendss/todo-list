@@ -1,12 +1,12 @@
 import Icon from '@/Components/Icon'
 import { get, isMobile } from '@utils/index'
-import { Button, Message, MessageBox } from 'element-ui'
+import { Button, Message, MessageBox, Input } from 'element-ui'
 import { getLog, addLog, writeLog, delLog } from './interface'
 
 const Msg = Message
 
 export default {
-	components: { Icon, Button },
+	components: { Icon, Button, EleInput: Input },
 	data() {
 		return {
 			tasks: [],
@@ -41,6 +41,12 @@ export default {
 		console.log('list content init')
 		this.EventEmitter.addListener('menuChange', this.onMenChange)
 	},
+	updated() {
+		const el = this.$el
+		const height = get(el, 'offsetHeight', null)
+		this.EventEmitter.emit('heightChange', height)
+		console.log('刷新dom', el)
+	},
 	methods: {
 		focusChange(flag) {
 			this.addFocus = flag
@@ -73,6 +79,7 @@ export default {
 		},
 		onFocus(event) {
 			this.keepText = get(event, 'target.value', '')
+			get(event, 'target.scrollIntoViewIfNeeded', () => {})()
 		},
 		async changeLog(index, key, handleType = 'string') {
 			let value = get(this.thatTasks, `[${index}].${key}`, null)
