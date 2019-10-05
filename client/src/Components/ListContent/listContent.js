@@ -99,7 +99,7 @@ export default {
 			const { id } = obj
 			await delLog(id)
 			Msg.success('删除成功')
-			this.tasks = await getLog(this.id)
+      this.tasks = await getLog(this.id)
 		},
 		swipeLeft(index) {
 			if (isMobile() === true) {

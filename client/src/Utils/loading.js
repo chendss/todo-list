@@ -8,9 +8,12 @@ class MyLoading {
 		this.loadingInstance = Loading.service(...args)
 	}
 	close = () => {
-		setTimeout(() => {
-			this.loadingInstance.close()
-		}, 10)
+		return new Promise(resolve => {
+			setTimeout(() => {
+				this.loadingInstance.close()
+				resolve()
+			}, 0)
+		})
 	}
 }
 
