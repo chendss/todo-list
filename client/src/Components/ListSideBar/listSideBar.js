@@ -1,17 +1,18 @@
 import { uniqBy } from 'lodash'
 import Icon from '@/Components/Icon'
 import Loading from '@utils/loading'
-import { get } from '@utils/index.js'
+import { get, random } from '@utils/index.js'
 import { getMenu, addMenu, delMenu } from './interface'
 import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox, Message } from 'element-ui'
 
 export default {
   data () {
     return {
-      open: true,
+      open: false,
       menuList: [],
       height: null,
-      active: '1'
+      active: '1',
+      classId: random()
     }
   },
   props: ['EventEmitter', 'title'],
@@ -22,6 +23,7 @@ export default {
       this.height = height
     })
     this.EventEmitter.emit('menuChange', this.menuList[0])
+    document.body.addEventListener('click', this.closePop)
   },
   methods: {
     async reloadList () {
@@ -32,6 +34,18 @@ export default {
     },
     collapse () {
       this.open = !this.open
+    },
+    closePop (event) {
+      const isCurrent = [...event.path].some(dom => {
+        const classList = get(dom, 'classList', null)
+        if (classList) {
+          return classList.contains(this.id) || dom.classList.contains(this.classId)
+        }
+        return false
+      })
+      if (!isCurrent) {
+        this.open = false
+      }
     },
     onSelect (index, indexPath) {
       this.active = index

@@ -1,6 +1,6 @@
 <template>
   <Menu :style="height?`height:${height}px`:''"
-    class="side-bar-menu"
+    :class="`side-bar-menu ${classId}`"
     :collapse="!open"
     @select="onSelect"
     :default-active="this.active"
