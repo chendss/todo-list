@@ -2,8 +2,8 @@ import { uniqBy } from 'lodash'
 import Icon from '@/Components/Icon'
 import Loading from '@utils/loading'
 import { get } from '@utils/index.js'
-import { getMenu, addMenu } from './interface'
-import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox } from 'element-ui'
+import { getMenu, addMenu, delMenu } from './interface'
+import { Menu, MenuItem, MenuItemGroup, Submenu, MessageBox, Message } from 'element-ui'
 
 export default {
 	data() {
@@ -20,14 +20,14 @@ export default {
 		this.EventEmitter.addListener('heightChange', height => {
 			this.height = height
 		})
+		this.EventEmitter.emit('menuChange', this.menuList[0])
 	},
 	methods: {
 		async reloadList() {
 			Loading.open()
 			let extraList = await getMenu()
 			Loading.close()
-			let menuList = this.menuList.concat(extraList)
-			this.menuList = uniqBy(menuList, 'id')
+			this.menuList = uniqBy(extraList, 'id')
 		},
 		collapse() {
 			this.open = !this.open
@@ -51,6 +51,19 @@ export default {
 			Loading.open()
 			await addMenu(data)
 			this.reloadList()
+		},
+		delMenu(id, name) {
+			MessageBox.confirm(`是否删除 ${name} 清单？`, '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'error',
+			}).then(async () => {
+				Loading.open()
+				await delMenu(id)
+				await this.reloadList()
+				Message.success('删除成功')
+				this.EventEmitter.emit('menuChange', this.menuList[0])
+			})
 		},
 	},
 }

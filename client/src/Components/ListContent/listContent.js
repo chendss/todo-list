@@ -56,7 +56,8 @@ export default {
 			}
 		},
 		async onMenChange(target) {
-			const { name, id } = target
+			const [name, id] = [get(target, 'name', ''), get(target, 'id', null)]
+			console.log('fuckm,', target)
 			this.title = name
 			this.id = id
 			Loading.open()

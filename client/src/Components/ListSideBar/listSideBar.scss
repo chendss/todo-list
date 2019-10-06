@@ -54,9 +54,29 @@
 				}
 			}
 		}
+		.delete-menu-box {
+			opacity: 0;
+			width: 40px;
+			float: right;
+			height: 100%;
+			cursor: pointer;
+			@include inline-flex();
+			justify-content: flex-end;
+			.delete-menu {
+				cursor: pointer;
+				color: #f78989;
+				border-color: #f78989;
+				font-size: 1.5em;
+				@include inline-flex();
+				background: transparent;
+			}
+		}
 		&:hover {
 			background-color: #f5f5f5;
 			background: #fafafa;
+			.delete-menu-box {
+				opacity: 1;
+			}
 		}
 	}
 	.is-active {

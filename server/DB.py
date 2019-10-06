@@ -179,7 +179,7 @@ def all_table():
 
 def del_data(table_name, constraint_dict=None):
     """
-    删除一条数据，如果constraint_dict为空那么则清空整个表内容
+    删除数据，如果constraint_dict为空那么则清空整个表内容
     :param table_name: 表名
     :param constraint_dict:约束条件的字典
     :return:

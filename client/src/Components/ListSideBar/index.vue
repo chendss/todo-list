@@ -20,11 +20,17 @@
     </div>
     <MenuItem v-for="(menu, index) in menuList"
       class="menu-item"
-      :key="index"
+      :key="menu.id"
       :index="(index+1)+''">
     <Icon :icon="menu.type==='custom'?'icon-zhedie':menu.icon"
       class="icon icon-item"></Icon>
     <span slot='title'>{{menu.name}}</span>
+    <div class="delete-menu-box"
+      v-touch:tap="()=>delMenu(menu.id,menu.name)"
+      v-if="open">
+      <button class="delete-menu el-icon-delete"
+        v></button>
+    </div>
     </MenuItem>
   </Menu>
 </template>
