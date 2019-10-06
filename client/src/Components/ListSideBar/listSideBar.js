@@ -11,6 +11,7 @@ export default {
       open: true,
       menuList: [],
       height: null,
+      active: '1'
     }
   },
   props: ['EventEmitter', 'title'],
@@ -32,16 +33,10 @@ export default {
     collapse () {
       this.open = !this.open
     },
-    onSelect (target) {
-      const { id } = target
-      const ul = this.$el.querySelectorAll('.menu-item')
-      ul.forEach(dom => {
-        if (id === dom.getAttribute('id')) {
-          dom.classList.add('is-active')
-        } else {
-          dom.classList.remove('is-active')
-        }
-      })
+    onSelect (index, indexPath) {
+      this.active = index
+      const pathList = indexPath.map(path => `[${path - 1}]`)
+      const target = get(this.menuList, pathList.join('.'), {})
       this.EventEmitter.emit('menuChange', target)
     },
     async add () {

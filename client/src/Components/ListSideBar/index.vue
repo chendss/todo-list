@@ -1,8 +1,9 @@
 <template>
-  <Menu default-active="1"
-    :style="height?`height:${height}px`:''"
+  <Menu :style="height?`height:${height}px`:''"
     class="side-bar-menu"
     :collapse="!open"
+    @select="onSelect"
+    :default-active="this.active"
     text-color="#34373d;"
     active-text-color="#2e5cdb">
     <div class="side-action-box">
@@ -21,7 +22,6 @@
       class="menu-item"
       :key="menu.id"
       :id="menu.id"
-      v-touch:tap="()=>onSelect(menu)"
       :index="(index+1)+''">
     <Icon :icon="menu.type==='custom'?'el-icon-document':menu.icon"
       class="icon icon-item"></Icon>
