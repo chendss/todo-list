@@ -36,10 +36,11 @@ export default {
       this.open = !this.open
     },
     closePop (event) {
-      const isCurrent = [...event.path].some(dom => {
+      let path = event.path || (event.composedPath && event.composedPath())
+      const isCurrent = [...path].some(dom => {
         const classList = get(dom, 'classList', null)
         if (classList) {
-          return classList.contains(this.id) || dom.classList.contains(this.classId)
+          return dom.classList.contains(this.classId)
         }
         return false
       })
