@@ -1,9 +1,3 @@
-import json
-import time
-import time
-import datetime
-import threading
-import subprocess
 from flask_cors import CORS
 from DB import create_table
 from user_info import user_info_api
