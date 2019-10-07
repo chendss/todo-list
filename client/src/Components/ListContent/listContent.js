@@ -22,19 +22,15 @@ export default {
   computed: {
     thatTasks () {
       const tasks = [...this.tasks]
-      const [topTasks, bottomTasks, normalTasks] = [[], [], []]
+      const [topTasks, normalTasks] = [[], []]
       for (let task of tasks) {
-        if (task.status) {
-          bottomTasks.push(task)
+        if (task.collection) {
+          topTasks.push(task)
         } else {
-          if (task.collection) {
-            topTasks.push(task)
-          } else {
-            normalTasks.push(task)
-          }
+          normalTasks.push(task)
         }
       }
-      const result = [].concat(topTasks, normalTasks, bottomTasks)
+      const result = [].concat(topTasks, normalTasks)
       return result
     },
   },
