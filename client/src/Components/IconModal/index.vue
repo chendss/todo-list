@@ -119,6 +119,8 @@ import { GET } from '@utils/request.js'
 import { get } from "@utils/index.js"
 import { Dialog, Button, Input, Card, Carousel, CarouselItem, Message } from "element-ui"
 
+let localIcons = []
+
 export default {
   components: { Dialog, Button, EleInput: Input, Icon, Card, Carousel, CarouselItem },
   props: ["cancel", "ok", "visible"],
@@ -138,8 +140,13 @@ export default {
   async mounted () {
     this.title = ''
     this.icon = ''
-    const icons = await GET('/icons')
-    this.icons = [...new Set(icons)]
+    if (localIcons.length !== 0) {
+      this.icons = localIcons
+    } else {
+      const icons = await GET('/icons')
+      this.icons = [...new Set(icons)]
+      localIcons = this.icons
+    }
   },
   methods: {
     close () {
