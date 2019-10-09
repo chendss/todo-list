@@ -13,7 +13,7 @@
           class="icon icon-side"></Icon>
       </div>
       <div class="icon-background-box"
-        @click="add">
+        @click="add" :style="!open?'pointer-events:none;opacity:0':''">
         <Icon icon="el-icon-plus"
           class="icon-plus"></Icon>
       </div>

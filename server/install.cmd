@@ -1,3 +1,3 @@
-python3 -m pip install --upgrade pip
+python -m pip install --upgrade pip
 pip3 install flask_cors
 pip3 install flask

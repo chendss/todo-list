@@ -64,6 +64,8 @@ def change_obj(obj):
         return obj
     content = obj if isinstance(obj, list) else [obj]
     for item in content:
+        if isinstance(item, str):
+            return
         for key in item.keys():
             if item[key] == 'False':
                 item[key] = False

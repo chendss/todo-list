@@ -1,8 +1,9 @@
+from icon import icon_api
 from flask_cors import CORS
 from DB import create_table
-from user_info import user_info_api
 from log_control import log_api
 from list_control import list_api
+from user_info import user_info_api
 from flask import Flask, redirect, abort, make_response, jsonify, send_file, request
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ CORS(app, resources=r'/*')
 app.register_blueprint(user_info_api)
 app.register_blueprint(list_api)
 app.register_blueprint(log_api)
+app.register_blueprint(icon_api)
 
 
 def mian():
