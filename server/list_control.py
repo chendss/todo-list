@@ -25,12 +25,14 @@ def add_list():
     api_param = request.get_json()
     name = api_param['name']
     type_ = api_param['type']
+    icon = api_param['icon']
     user_id = user_id_by_token(token)
     insert_data('list', {
         'user_id': user_id,
         'name': name,
         'id': rand_string(),
-        'type': type_
+        'type': type_,
+        'icon': icon
     })
     commit()
     return api_factory(True)
