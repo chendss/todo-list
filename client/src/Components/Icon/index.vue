@@ -10,7 +10,8 @@
 <template>
   <div class="icon-box"
     v-touch:tap="iconClick">
-    <i :class="iconName"></i>
+    <i :class="`icon-box-item ${iconName}`"
+      :style="size?`font-size:${size}px`:''"></i>
   </div>
 </template>
 
@@ -18,7 +19,7 @@
 import { get } from '@utils/index.js'
 
 export default {
-  props: ['icon'],
+  props: ['icon', 'size'],
   data () {
     return {
     }
@@ -29,7 +30,6 @@ export default {
       if (name.includes('el-icon')) {
         return name + ' font-16'
       } else {
-
         return 'iconfont ' + name
       }
     }
