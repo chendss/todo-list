@@ -2,7 +2,7 @@ import json
 from tools import rand_string
 from flask import Blueprint, request
 from public import api_factory, err_factory, user_id_by_token, check_login, unquote
-from DB import commit, search_data, insert_data, table, del_data
+from DB import search_data, insert_data, table, del_data
 
 list_api = Blueprint('list_api', __name__)
 
@@ -34,7 +34,6 @@ def add_list():
         'type': type_,
         'icon': icon
     })
-    commit()
     return api_factory(True)
 
 
@@ -42,9 +41,6 @@ def add_list():
 @check_login
 def del_list(list_id):
     id_ = unquote(list_id)
-    print('查询一下1', search_data('log', {'list_id': id_}))
     del_data('list', {'id': id_})
     del_data('log', {'list_id': id_})
-    commit()
-    print('查询一下', search_data('log', {'list_id': id_}))
     return api_factory(True)

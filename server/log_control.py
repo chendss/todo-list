@@ -2,7 +2,7 @@ import json
 from tools import rand_string
 from flask import Blueprint, request
 from public import api_factory, err_factory, unquote, check_login, user_id_by_token
-from DB import commit, search_data, update_data, table, commit, del_data, insert_data
+from DB import search_data, update_data, table, del_data, insert_data
 
 log_api = Blueprint('log_api', __name__)
 
@@ -19,7 +19,6 @@ def change_log(log_id):
         if key in api_param.keys():
             db_value[key] = api_param[key]
     update_data('log', db_value, {'id': id_})
-    commit()
     return api_factory({'msg': '修改成功'})
 
 
@@ -28,7 +27,6 @@ def change_log(log_id):
 def del_log(log_id):
     id_ = unquote(log_id)
     del_data('log', {'id': id_})
-    commit()
     return api_factory({'msg': '删除成功'})
 
 
@@ -57,5 +55,4 @@ def add_log(list_id):
         'content': api_param['text']
     }
     insert_data('log', item)
-    commit()
     return api_factory(True)

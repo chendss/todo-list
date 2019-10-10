@@ -2,19 +2,15 @@ import sqlite3
 import time
 from sql_tools import split_dict, join_dict, str_to_table, tuple_to_dict, tuple_to_str
 
-con = sqlite3.connect('list.db', check_same_thread=False)
-cursor = con.cursor()
-print('DB Created')
 
-
-def commit():
+def commit(con):
     """
     数据库提交函数
     """
     con.commit()
 
 
-def close():
+def close(con, cursor):
     cursor.close()
     con.commit()
     con.close()
@@ -58,6 +54,9 @@ def insert_batch(table_name, base_key_list, item_list):
     :param item_list:[(第一个键的值，第二个……，第n个),(第一个键的值，第二个……，第n个),]
     :return:
     """
+    con = sqlite3.connect('list.db')
+    cursor = con.cursor()
+    print('DB Created')
     key_list = base_key_list if isinstance(
         base_key_list, list) else [base_key_list]
     key_str = ','.join(key_list)
@@ -67,6 +66,7 @@ def insert_batch(table_name, base_key_list, item_list):
         con.executemany(command, item_list)
     except BaseException as error:
         print(error, command, '此sqlite语句发送了一个异常')
+    close(con, cursor)
 
 
 # -----------------------------------
@@ -127,12 +127,16 @@ def all_column(column_name):
     :return: []
     """
     return_value = []
+    con = sqlite3.connect('list.db')
+    cursor = con.cursor()
+    print('DB Created')
     for table_name in all_table():
         props = table_structure(table_name)
         if column_name in props:
             key_column = cursor.execute(
                 f'select {column_name} from {table_name}').fetchall()
             return_value.extend(key_column)
+    close(con, cursor)
     return [tuple_to_str(value) for value in return_value]
 
 
@@ -214,11 +218,17 @@ def call(sqlite_command):
     :param sqlite_command: sqlite语句
     :return:
     """
+    con = sqlite3.connect('list.db')
+    cursor = con.cursor()
+    print('DB Created', sqlite_command)
+    result = None
     try:
-        return cursor.execute(sqlite_command).fetchall()
+        result = cursor.execute(sqlite_command).fetchall()
     except sqlite3.IntegrityError:
         pass
     except BaseException as error:
         print(error, f'此 {sqlite_command}\n sqlite语句发送了一个异常')
         time.sleep(5)
-        return 'error'
+        result = 'error'
+    close(con, cursor)
+    return result

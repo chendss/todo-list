@@ -1,7 +1,7 @@
 import json
 from tools import rand_string
 from flask import Blueprint, request
-from DB import commit, search_data, insert_data, insert_batch, commit
+from DB import search_data, insert_data, insert_batch
 from public import api_factory, err_factory, set_token, update_data, check_login
 
 user_info_api = Blueprint('user_info_api', __name__)
@@ -36,7 +36,6 @@ def login():
     else:
         token = rand_string()
         set_token(user, token)
-        commit()
         print('更新token', user, token)
         return api_factory(token)
 
@@ -56,7 +55,6 @@ def register():
         token = rand_string()
         set_token(user, token)
         create_menu(user)
-        commit()
         return api_factory(token)
     else:
         return err_factory('该用户已存在', None, 403)
@@ -68,5 +66,4 @@ def upToken():
     token = request.headers.get('token')
     next_token = rand_string()
     update_data('user', {'token': next_token}, {'token': token})
-    commit()
     return api_factory(next_token)
