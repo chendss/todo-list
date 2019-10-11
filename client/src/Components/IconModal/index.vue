@@ -14,7 +14,7 @@
         text-align: left;
       }
       .right {
-        $h: 900px;
+        $h: calc(100vw - 350px);
         width: calc(100% - #{$w});
         max-height: $h;
         overflow-y: auto;
