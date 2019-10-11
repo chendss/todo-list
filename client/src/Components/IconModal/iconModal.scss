@@ -1,0 +1,80 @@
+.icon-modal-box {
+  @include flex();
+  align-items: flex-start;
+  padding-top: 5vh;
+  overflow: hidden;
+  .el-dialog__header {
+    padding: 10px 10px 10px;
+  }
+  .el-dialog__body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .el-dialog__footer {
+    padding-bottom: 10px;
+  }
+  .modal-contetn {
+    $w: 100px;
+    .row {
+      @include flex();
+      .title {
+        white-space: nowrap;
+        margin-right: 10px;
+        width: $w;
+        text-align: left;
+      }
+      .right {
+        $h: calc(100vw - 350px);
+        width: calc(100% - #{$w});
+        max-height: $h;
+        overflow-y: auto;
+        .el-carousel__container {
+          height: 500px;
+          max-height: $h;
+          .el-card {
+            overflow-y: auto;
+            height: 100%;
+            @include flex();
+          }
+        }
+        .add-icon-item {
+          cursor: pointer;
+          margin-left: 16px;
+          margin-bottom: 16px;
+          & {
+            :hover {
+              transform: scale(2);
+            }
+          }
+        }
+        .icon-check {
+          @keyframes circle {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+          animation: circle 1.5s infinite linear;
+          transform: scale(1.5);
+          i {
+            color: $blue;
+          }
+        }
+        .el-card__body {
+          padding: 16px 10px 32px 0px;
+          flex-wrap: wrap;
+          @include flex();
+        }
+      }
+      &:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .icon-modal-footer {
+    @include flex();
+    justify-content: flex-end;
+  }
+}
