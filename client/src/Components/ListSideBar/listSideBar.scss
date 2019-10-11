@@ -1,5 +1,6 @@
 .side-bar-menu {
   min-height: calc(100vh - #{$header-height * 1px});
+  height: auto !important;
   overflow: hidden;
   background: #f4f4f4;
   position: relative;

@@ -3,7 +3,7 @@
     <ListHeader :EventEmitter="EventEmitter"
       class="header-list"
       :title="title"></ListHeader>
-    <div class="content">
+    <div class="content" :style="`height:${containerHeight}px`">
       <ListSideBar class="side-bar"
         :EventEmitter="EventEmitter"
         :title="title"></ListSideBar>

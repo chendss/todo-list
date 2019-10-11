@@ -41,7 +41,7 @@ export default {
   updated () {
     const el = this.$el
     const height = get(el, 'offsetHeight', null)
-    this.EventEmitter.emit('heightChange', height)
+    this.EventEmitter.emit('contentHeightChange', height)
     console.log('刷新dom', el)
   },
   methods: {

@@ -21,12 +21,15 @@ export default {
 	components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon, IconModal },
 	mounted() {
 		this.reloadList()
-		this.EventEmitter.addListener('heightChange', height => {
-			this.height = height
-		})
 		this.EventEmitter.emit('menuChange', this.menuList[0])
 		document.body.addEventListener('click', this.closePop)
 	},
+	updated () {
+    const el = this.$el
+    const height = get(el, 'offsetHeight', null)
+    this.EventEmitter.emit('sideBarHeightChange', height)
+    console.log('刷新dom', el)
+  },
 	methods: {
 		async reloadList() {
 			Loading.open()
