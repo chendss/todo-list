@@ -11,8 +11,8 @@ def commit(con):
 
 
 def close(con, cursor):
-    cursor.close()
     con.commit()
+    cursor.close()
     con.close()
 
 
