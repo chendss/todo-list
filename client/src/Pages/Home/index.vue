@@ -15,7 +15,7 @@
     </div>
     <footer class="footer"
       v-if="!$mobile">
-      <img src="@img/background.jpg">
+      <img :src="$config.background">
     </footer>
   </div>
 </template>

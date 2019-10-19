@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import store from '@stores'
+import config from './config'
 import App from './App.vue'
 import '@icon/iconfont.css'
 import router from './Route'
@@ -16,6 +17,7 @@ const vueUse = function() {
 const vueSetting = function() {
 	Vue.config.productionTip = false
 	Vue.prototype.$mobile = isMobile()
+	Vue.prototype.$config = config
 }
 
 const vueInit = function() {

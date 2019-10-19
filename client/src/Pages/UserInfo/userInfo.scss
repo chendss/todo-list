@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	background: url('../../assets//img/bg.jpg') 50% / cover no-repeat fixed;
+	background: url('https://ae01.alicdn.com/kf/H9c10e4b00f134eba8121522ecf7bab02a.jpg') 50% / cover no-repeat fixed;
 	&::after {
 		@include full-abs();
 		position: absolute;
@@ -37,7 +37,8 @@
 			position: absolute;
 			@include full-abs();
 			background-attachment: fixed;
-			background: url('../../assets//img/bg.jpg') 50% / cover no-repeat fixed;
+			background: url('https://ae01.alicdn.com/kf/H9c10e4b00f134eba8121522ecf7bab02a.jpg') 50% / cover no-repeat
+				fixed;
 		}
 		> * {
 			position: relative;
