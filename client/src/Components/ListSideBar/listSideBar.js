@@ -27,7 +27,7 @@ export default {
 			const localSideBar = DB.get('sideBar') || {}
 			const id = get(localSideBar, 'id', '')
 			const index = list.findIndex(item => item.id === id)
-			const target = get(list, index, null)
+			const target = get(list, index === -1 ? 0 : index, null)
 			this.EventEmitter.emit('menuChange', target)
 		})
 		document.body.addEventListener('click', this.closePop)
