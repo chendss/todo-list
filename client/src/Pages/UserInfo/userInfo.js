@@ -46,14 +46,14 @@ export default {
 					const { username, password } = this.param
 					if (username === 'admin' && password === 'admin') {
 						DB.set('token', { token: 'debug' })
-						this.$router.push('/list')
+						this.$router.push('/list/')
 					} else {
 						Loading.open()
 						await action(this.type, username, password)
 						Loading.close()
 						message.success({ message: msg, duration: 1000 })
 						DB.set('userInfo', { password, username })
-						this.$router.push('/list')
+						this.$router.push('/list/')
 					}
 				}
 			})

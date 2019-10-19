@@ -1,4 +1,5 @@
 import { uniqBy } from 'lodash'
+import { DB } from '@utils/index'
 import Icon from '@/Components/Icon'
 import Loading from '@utils/loading'
 import IconModal from '../IconModal'
@@ -8,44 +9,66 @@ import { Menu, MenuItem, MenuItemGroup, Submenu, Message, MessageBox } from 'ele
 
 export default {
 	data() {
+		const localSideBar = DB.get('sideBar') || {}
 		return {
-			open: false,
+			active: get(localSideBar, 'active', '1'),
 			menuList: [],
 			height: null,
-			active: '1',
-			classId: random(),
 			visible: false,
+			targetId: get(localSideBar, 'id', null),
+			classId: random(),
+			open: get(localSideBar, 'open', true),
 		}
 	},
 	props: ['EventEmitter', 'title'],
 	components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon, IconModal },
 	mounted() {
-		this.reloadList()
-		this.EventEmitter.emit('menuChange', this.menuList[0])
+		this.reloadList().then(list => {
+			const localSideBar = DB.get('sideBar') || {}
+			const id = get(localSideBar, 'id', '')
+			const index = list.findIndex(item => item.id === id)
+			const target = get(list, index, null)
+			this.EventEmitter.emit('menuChange', target)
+		})
 		document.body.addEventListener('click', this.closePop)
 	},
-	updated () {
-    const el = this.$el
-    const height = get(el, 'offsetHeight', null)
-    this.EventEmitter.emit('sideBarHeightChange', height)
-    console.log('刷新dom', el)
-  },
+	watch: {
+		targetId(id) {
+			const localSideBar = DB.get('sideBar') || {}
+			const target = this.menuList.find(item => item.id === id)
+			this.EventEmitter.emit('menuChange', target)
+			const sideBar = localSideBar || {}
+			sideBar.id = id
+			sideBar.active = this.active
+			sideBar.name = get(target, 'name', '')
+			DB.set('sideBar', sideBar)
+		},
+	},
+	updated() {
+		const el = this.$el
+		const height = get(el, 'offsetHeight', null)
+		this.EventEmitter.emit('sideBarHeightChange', height)
+		console.log('刷新dom', el)
+	},
 	methods: {
 		async reloadList() {
 			Loading.open()
 			let extraList = await getMenu()
 			Loading.close()
-			this.menuList = uniqBy(extraList, 'id')
+			const result = uniqBy(extraList, 'id')
+			this.menuList = result
+			return result
 		},
 		collapse() {
 			this.open = !this.open
+			DB.set('sideBar', { open: this.open })
 		},
 		closePop(event) {
 			let path = event.path || (event.composedPath && event.composedPath())
 			const isCurrent = [...path].some(dom => {
 				const classList = get(dom, 'classList', null)
 				if (classList) {
-					return ['el-dialog', this.classId].some(item => dom.classList.contains(item))
+					return ['el-dialog', this.classId, 'el-message-box'].some(item => dom.classList.contains(item))
 				}
 				return false
 			})
@@ -54,10 +77,10 @@ export default {
 			}
 		},
 		onSelect(index, indexPath) {
-			this.active = index
+			this.active = index + ''
 			const pathList = indexPath.map(path => `[${path - 1}]`)
 			const target = get(this.menuList, pathList.join('.'), {})
-			this.EventEmitter.emit('menuChange', target)
+			this.targetId = get(target, 'id', null)
 		},
 		async add() {
 			if (!this.open) return
@@ -83,7 +106,8 @@ export default {
 				await delMenu(id)
 				await this.reloadList()
 				Message.success('删除成功')
-				this.EventEmitter.emit('menuChange', this.menuList[0])
+				const target = get(this.menuList, '[0]', null)
+				this.targetId = get(target, 'id', null)
 			})
 		},
 	},

@@ -1,4 +1,4 @@
-import { typeZh } from './objectTools'
+import { typeZh, type } from './objectTools'
 
 /**
  * 将任意参数变成数组
@@ -6,7 +6,8 @@ import { typeZh } from './objectTools'
  * @param {*} val
  * @returns {Array<any>}
  */
-export const castArray = function(val) {
+export const toArray = function(val) {
+	console.log('不是吗？', type(val))
 	if (typeZh(val) === '数组') {
 		return val
 	} else {

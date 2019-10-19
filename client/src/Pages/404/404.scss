@@ -1,6 +1,7 @@
 .no-found-box {
 	@include full();
 	@include flex();
+	height: 100vh;
 	background: url('../../assets//img/bg.jpg') 50% / cover no-repeat fixed;
 	&::after {
 		@include full-abs();
