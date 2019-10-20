@@ -3,7 +3,7 @@ import { DB } from '@utils/index'
 import Icon from '@/Components/Icon'
 import Loading from '@utils/loading'
 import IconModal from '../IconModal'
-import { get, random } from '@utils/index.js'
+import { get, random, merge } from '@utils/index.js'
 import { getMenu, addMenu, delMenu } from './interface'
 import { Menu, MenuItem, MenuItemGroup, Submenu, Message, MessageBox } from 'element-ui'
 
@@ -11,25 +11,25 @@ export default {
 	data() {
 		const localSideBar = DB.get('sideBar') || {}
 		return {
-			active: get(localSideBar, 'active', '1'),
-			menuList: [],
 			height: null,
 			visible: false,
-			targetId: get(localSideBar, 'id', null),
 			classId: random(),
 			open: get(localSideBar, 'open', true),
+			targetId: get(localSideBar, 'id', null),
+			active: get(localSideBar, 'active', '1'),
+			menuList: get(localSideBar, 'menuList', []),
 		}
 	},
 	props: ['EventEmitter', 'title'],
 	components: { Menu, MenuItem, MenuItemGroup, Submenu, Icon, IconModal },
-	mounted() {
-		this.reloadList().then(list => {
-			const localSideBar = DB.get('sideBar') || {}
-			const id = get(localSideBar, 'id', '')
-			const index = list.findIndex(item => item.id === id)
-			const target = get(list, index === -1 ? 0 : index, null)
-			this.EventEmitter.emit('menuChange', target)
-		})
+	async mounted() {
+		let list = await this.reloadList()
+		list = list instanceof Array ? list : this.menuList
+		const localSideBar = DB.get('sideBar') || {}
+		const id = get(localSideBar, 'id', '')
+		const index = list.findIndex(item => item.id === id)
+		const target = get(list, index === -1 ? 0 : index, null)
+		this.EventEmitter.emit('menuChange', target)
 		document.body.addEventListener('click', this.closePop)
 	},
 	watch: {
@@ -53,11 +53,17 @@ export default {
 	methods: {
 		async reloadList() {
 			Loading.open()
-			let extraList = await getMenu()
-			Loading.close()
+			let extraList = await getMenu().catch(() => {})
 			const result = uniqBy(extraList, 'id')
-			this.menuList = result
-			return result
+			if (extraList instanceof Array) {
+				this.menuList = result
+				const localSideBar = DB.get('sideBar') || {}
+				const targetObj = merge(localSideBar, {
+					menuList: result,
+				})
+				DB.set('sideBar', targetObj)
+				return result
+			}
 		},
 		collapse() {
 			this.open = !this.open

@@ -3,8 +3,11 @@ import { get, DB } from './index'
 import { Message } from 'element-ui'
 import route from '@/Route/index'
 import Loading from './loading'
+import { cloneDeep } from 'lodash'
 
 const Info = Message
+const CancelTOken = axios.CancelToken
+const source = CancelTOken.source()
 const { href, protocol, hostname } = window.location
 
 const apiRequest = {
@@ -14,13 +17,18 @@ const apiRequest = {
 
 const interceptorsErr = function(err) {
 	// 对响应错误做些什么
+	const { message } = JSON.parse(JSON.stringify(err))
+	let newWorkMsg = null
+	if (message.includes('Network')) {
+		newWorkMsg = '不知道是后端爆炸了，还是网络爆炸了'
+	}
 	const response = get(err, 'response', { status: -500 })
 	const status = get(response, 'status', 200)
 	const url = get(err, 'config.url', '')
 	const requestData = get(err, 'config.data', '')
 	let result = get(response, 'data', {
 		data: {
-			msg: `接口报错,地址为 ${url},参数为 ${requestData}`,
+			msg: newWorkMsg || `接口报错,地址为 ${url},参数为 ${requestData}`,
 		},
 		success: false,
 		status: response.status,
@@ -30,7 +38,9 @@ const interceptorsErr = function(err) {
 		route.goHome()
 	}
 	if (process.env.NODE_ENV === 'development') {
-		alert(JSON.stringify(err))
+		const errStr = JSON.stringify(err)
+		console.log('报错', errStr)
+		alert(errStr)
 	}
 	Loading.close()
 	return Promise.resolve({ data: result })
@@ -44,8 +54,9 @@ const request = function(method, url, data) {
 	const config = {
 		url,
 		method,
-		baseURL: apiRequest[process.env.NODE_ENV],
 		timeout: 6000,
+		cancelToken: source.token,
+		baseURL: apiRequest[process.env.NODE_ENV],
 	}
 	if (['post', 'put'].includes(method.toLowerCase())) {
 		config.data = data

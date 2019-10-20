@@ -1,6 +1,6 @@
 import Icon from '@/Components/Icon'
 import Loading from '@utils/loading'
-import { get, isMobile } from '@utils/index'
+import { get, isMobile, DB } from '@utils/index'
 import { getLog, addLog, writeLog, delLog } from './interface'
 import { Button, Message, MessageBox, Input } from 'element-ui'
 
@@ -11,9 +11,9 @@ export default {
 	data() {
 		return {
 			text: '',
-			tasks: [],
 			keepText: '',
 			addFocus: false,
+			tasks: get(DB.get('listContent'), 'tasks', []),
 		}
 	},
 	props: ['EventEmitter', 'id', 'title'],
@@ -34,7 +34,7 @@ export default {
 	},
 	watch: {
 		id(id) {
-			console.log('log id', id)
+			console.log('清单变化，重新请求', id)
 			this.loadLog(id)
 		},
 	},
@@ -59,6 +59,7 @@ export default {
 			let res = await getLog(id)
 			Loading.close()
 			this.tasks = res
+			DB.set('listContent', { tasks: this.tasks })
 		},
 		addKeypress(event) {
 			const code = get(event, 'code', '')
