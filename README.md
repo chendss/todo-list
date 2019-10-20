@@ -3,11 +3,17 @@
 仿微软 todo，后端技术栈为 sqlite+flask+python
 任何人都可以简单搭建属于自己的 todo-list
 
-## 自己部署
+## 调试与部署
 
-运行 server/install.sh （注意提权限）,启动 python3.x main.py
-在 client , npm run serve
-访问 localhost:6363 即可访问此清单项目
+### 开发
+
+-   运行 server/install.sh （注意提权限）,启动 python3.x main.py
+-   在 client , npm run serve
+-   访问 localhost:6363 即可访问此清单项目
+
+### 部署
+
+-   npm run build
 
 ## 展示
 
