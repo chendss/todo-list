@@ -53,7 +53,7 @@ export default {
 	methods: {
 		async reloadList() {
 			Loading.open()
-			let extraList = await getMenu().catch(() => {})
+			let extraList = await getMenu().catch(() => { })
 			const result = uniqBy(extraList, 'id')
 			if (extraList instanceof Array) {
 				this.menuList = result
@@ -70,16 +70,20 @@ export default {
 			DB.set('sideBar', { open: this.open })
 		},
 		closePop(event) {
-			let path = event.path || (event.composedPath && event.composedPath())
-			const isCurrent = [...path].some(dom => {
-				const classList = get(dom, 'classList', null)
-				if (classList) {
-					return ['el-dialog', this.classId, 'el-message-box'].some(item => dom.classList.contains(item))
-				}
-				return false
-			})
-			if (!isCurrent) {
+			if (this.$mobile) {
 				this.open = false
+			} else {
+				let path = event.path || (event.composedPath && event.composedPath())
+				const isCurrent = [...path].some(dom => {
+					const classList = get(dom, 'classList', null)
+					if (classList) {
+						return ['el-dialog', this.classId, 'el-message-box'].some(item => dom.classList.contains(item))
+					}
+					return false
+				})
+				if (!isCurrent) {
+					this.open = false
+				}
 			}
 		},
 		onSelect(index, indexPath) {
