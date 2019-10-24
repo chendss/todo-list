@@ -10,7 +10,6 @@ export default {
 	components: { Form, FormItem, ElementInput: Input, Button, Icon },
 	data() {
 		const userInfo = DB.get('userInfo')
-		console.log('fuckl', userInfo)
 		return {
 			param: {
 				username: get(userInfo, 'username', ''),
