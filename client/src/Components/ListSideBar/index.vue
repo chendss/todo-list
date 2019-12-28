@@ -1,7 +1,7 @@
 <template>
   <Menu :style="height?`height:${height}px`:''"
     :class="`side-bar-menu ${classId}`"
-    :collapse="!open"
+    :open="open"
     @select="onSelect"
     :default-active="this.active"
     text-color="#34373d;"
@@ -20,13 +20,15 @@
       </div>
     </div>
     <MenuItem v-for="(menu, index) in menuList"
+      :title="menu.name"
       class="menu-item"
       :key="menu.id"
       :id="menu.id"
       :index="(index+1)+''">
     <Icon :icon="menu.icon===null?'el-icon-document':menu.icon"
       class="icon icon-item"></Icon>
-    <span slot="title">{{menu.name}}</span>
+    <span slot="title"
+      v-if="open">{{menu.name}}</span>
     <div class="delete-menu-box"
       v-touch:tap="()=>delMenu(menu.id,menu.name)"
       v-if="open">
