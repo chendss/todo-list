@@ -1,12 +1,12 @@
 .side-bar-menu {
-	min-height: calc(100vh - #{$header-height * 1px});
-	height: auto !important;
-	overflow: hidden;
-	background: #f4f4f4;
-	position: relative;
-	border-right: 1px solid #eaeaea;
-	margin-right: auto;
 	width: 64px;
+	overflow: hidden;
+	position: relative;
+	margin-right: auto;
+	background: #f4f4f4;
+	height: auto !important;
+	border-right: 1px solid #eaeaea;
+	min-height: calc(100vh - #{$header-height * 1px});
 	&[open='open'] {
 		width: 200px;
 	}
@@ -16,8 +16,8 @@
 		@include inline-flex();
 		padding: 10px 0 10px 0px;
 		.icon-background-box {
-			padding: 10px;
 			height: 37px;
+			padding: 10px;
 			cursor: pointer;
 			display: inline-flex;
 			&:hover {
@@ -58,25 +58,25 @@
 		}
 		.delete-menu-box {
 			opacity: 0;
-			float: right;
 			width: 0px;
-			overflow: hidden;
+			float: right;
 			height: 100%;
 			cursor: pointer;
+			overflow: hidden;
 			@include inline-flex();
 			justify-content: flex-end;
 			.delete-menu {
-				cursor: pointer;
 				color: #f78989;
-				border-color: #f78989;
+				cursor: pointer;
 				font-size: 1.5em;
+				border-color: #f78989;
 				@include inline-flex();
 				background: transparent;
 			}
 		}
 		&:hover {
-			background-color: #f5f5f5;
 			background: #fafafa;
+			background-color: #f5f5f5;
 			.delete-menu-box {
 				opacity: 1;
 				width: 40px;
