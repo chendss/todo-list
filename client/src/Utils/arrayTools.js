@@ -6,13 +6,12 @@ import { typeZh, type } from './objectTools'
  * @param {*} val
  * @returns {Array<any>}
  */
-export const toArray = function(val) {
-	console.log('不是吗？', type(val))
-	if (typeZh(val) === '数组') {
-		return val
-	} else {
-		return [val].map(item => item)
-	}
+export const toArray = function (val) {
+  if (typeZh(val) === '数组') {
+    return val
+  } else {
+    return [val].map(item => item)
+  }
 }
 
 /**
@@ -21,12 +20,12 @@ export const toArray = function(val) {
  * @param {Array<any>} array
  * @param {number} [n=0]
  */
-export const nth = function(array, n = 0) {
-	let length = array.length
-	if (n >= 0) {
-		return array[n]
-	} else {
-		let n_ = length - Math.abs(n)
-		return array[n_]
-	}
+export const nth = function (array, n = 0) {
+  let length = array.length
+  if (n >= 0) {
+    return array[n]
+  } else {
+    let n_ = length - Math.abs(n)
+    return array[n_]
+  }
 }
