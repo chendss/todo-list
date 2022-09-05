@@ -11,7 +11,7 @@ const source = CancelTOken.source()
 const { href, protocol, hostname } = window.location
 
 const apiRequest = {
-  production: !href.includes('https') ? 'http://d.bjong.me:6382' : 'https://listServer.dashao.me:2',
+  production: !href.includes('https') ? 'http://d.bjong.me:6382' : 'https://listServer.rainys.me:2',
   development: href.includes('localhost') ? 'http://127.0.0.1:6382' : `${protocol}//${hostname}:6382`,
 }
 
